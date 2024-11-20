@@ -1,0 +1,8 @@
+{
+    "label": "Containers",
+    "position": 1,       
+    "link": {
+        "type": "generated-index",
+        "description": "Guides for deploying CiFarm Containers into K8S Cluster"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "label": "Traffic",
+    "position": 4,       
+    "link": {
+        "type": "generated-index",
+        "description": "Guides for deploying CiFarm Traffic into K8S Cluster"
+    }
+}

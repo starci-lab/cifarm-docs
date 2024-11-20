@@ -1,0 +1,8 @@
+{
+    "label": "Autoscaler",
+    "position": 5,       
+    "link": {
+        "type": "generated-index",
+        "description": "Guides for deploying CiFarm Autoscaler into K8S Cluster"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "label": "Monitoring",
+    "position": 3,       
+    "link": {
+        "type": "generated-index",
+        "description": "Guides for deploying CiFarm Monitoring into K8S Cluster"
+    }
+}
