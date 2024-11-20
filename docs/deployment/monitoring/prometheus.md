@@ -38,7 +38,7 @@ helm install prometheus bitnami/kube-prometheus \
     -f ./bitnami/monitoring/prometheus/values.yaml
 ```
 ## Access 
-### Prometheus Server
+### Prometheus
 - **Kind**: Service  
 - **Type**: ClusterIP  
 - **Host**: `prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local`  
@@ -53,7 +53,7 @@ kubectl port-forward svc/prometheus-kube-prometheus-prometheus 9090:9090 \
 # Visit the Prometheus Dashboard
 http://127.0.0.1:9090
 ```
-### Prometheus Alertmanager Server
+### Prometheus Alertmanager
 - **Kind**: Service  
 - **Type**: ClusterIP  
 - **Host**: `prometheus-kube-prometheus-alertmanager.monitoring.svc.cluster.local`  
