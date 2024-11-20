@@ -10,7 +10,7 @@ const config: Config = {
     favicon: "img/favicon.ico",
 
     // Set the production url of your site here
-    url: "https://docs.cifarm.net",
+    url: "https://docs.cifarm.starci.net",
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
     baseUrl: "/",
@@ -77,13 +77,6 @@ const config: Config = {
                     label: "Deployment"
                 },
                 {
-                    type: "docSidebar",
-                    sidebarId: "tutorialSidebar",
-                    position: "left",
-                    label: "Tutorial"
-                },
-                { to: "/blog", label: "Blog", position: "left" },
-                {
                     href: "https://github.com/starci-lab",
                     label: "GitHub",
                     position: "right"
@@ -93,15 +86,6 @@ const config: Config = {
         footer: {
             style: "dark",
             links: [
-                {
-                    title: "Docs",
-                    items: [
-                        {
-                            label: "Tutorial",
-                            to: "/docs/intro"
-                        }
-                    ]
-                },
                 {
                     title: "Community",
                     items: [
@@ -119,19 +103,6 @@ const config: Config = {
                         }
                     ]
                 },
-                {
-                    title: "More",
-                    items: [
-                        {
-                            label: "Blog",
-                            to: "/blog"
-                        },
-                        {
-                            label: "GitHub",
-                            href: "https://github.com/starci-lab/"
-                        }
-                    ]
-                }
             ],
             copyright: `Copyright © ${new Date().getFullYear()} CiFarm, Inc. Built with Docusaurus.`
         },
