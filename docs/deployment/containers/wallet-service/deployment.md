@@ -5,7 +5,7 @@ description: This section guides you through building the Wallet Service in your
 ---
 # Wallet Service Deployment
 ## Introduction
-n this section, we will walk through the steps necessary to deploy the Wallet Service in your Kubernetes environment. The Wallet Service is a key component of the application, responsible for handling wallet-related operations. We will guide you through adding and updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and finally, deploying the service using Helm.
+In this section, we will walk through the steps necessary to deploy the Wallet Service in your Kubernetes environment. The Wallet Service is a key component of the application, responsible for handling wallet-related operations. We will guide you through adding and updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and finally, deploying the service using Helm.
 
 The deployment process includes setting up necessary configurations, such as database connection details, and then installing the service using Helm charts. Once the service is deployed, we will also provide instructions for accessing the service both within the cluster and externally via port forwarding.
 
