@@ -17,8 +17,8 @@ const config: Config = {
 
     // GitHub pages deployment config.
     // If you aren't using GitHub pages, you don't need these.
-    organizationName: "CiFarm", // Usually your GitHub org/user name.
-    projectName: "docusaurus", // Usually your repo name.
+    organizationName: "starci-lab", // Usually your GitHub org/user name.
+    projectName: "cifarm-docs", // Usually your repo name.
 
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
