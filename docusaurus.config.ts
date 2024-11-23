@@ -77,6 +77,12 @@ const config: Config = {
                     position: "left",
                     label: "Deployment"
                 },
+                { 
+                    type: "docSidebar",
+                    sidebarId: "architectureSidebar",
+                    position: "left",
+                    label: "Architecture"
+                },
                 {
                     href: "https://github.com/starci-lab",
                     label: "GitHub",
