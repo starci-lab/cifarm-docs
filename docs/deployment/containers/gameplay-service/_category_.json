@@ -1,8 +1,8 @@
 {
-    "label": "Wallet Service",
+    "label": "Gameplay Service",
     "position": 8,       
     "link": {
         "type": "generated-index",
-        "description": "Guides for deploying Wallet Service into K8S Cluster"
+        "description": "Guides for deploying Gameplay Service into K8S Cluster"
     }
 }
