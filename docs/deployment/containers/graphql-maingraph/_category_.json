@@ -1,0 +1,8 @@
+{
+    "label": "GraphQL MainGraph",
+    "position": 8,       
+    "link": {
+        "type": "generated-index",
+        "description": "Guides for deploying GraphQL Maingraph into K8S Cluster"
+    }
+}
