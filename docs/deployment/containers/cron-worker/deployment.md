@@ -5,11 +5,13 @@ description: This section guides you through building the Cron Worker in your Ku
 ---
 # Cron Worker Deployment
 ## Introduction
-In this section, we will walk through the steps necessary to deploy the Cron Worker in your Kubernetes environment. The Cron Worker is a key component of the application, responsible for handling gameplay-related operations. We will guide you through adding and updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and finally, deploying the service using Helm.
 
-The deployment process includes setting up necessary configurations, such as database connection details, and then installing the service using Helm charts. Once the service is deployed, we will also provide instructions for accessing the service both within the cluster and externally via port forwarding.
+In this section, we provide a detailed guide to deploying the Cron Worker in your Kubernetes environment. The Cron Worker is an integral part of the application, responsible for executing scheduled tasks and background operations. This guide will walk you through the process of adding or updating the Helm repository, creating a dedicated namespace, configuring essential environment variables, and deploying the service using Helm charts.
 
-By following these steps, you'll be able to set up and deploy the Cron Worker within your Kubernetes environment and configure it to work with the PostgreSQL database.
+The deployment steps include configuring key settings, such as database connection details, and installing the service using Helm. After deployment, we will outline how to access the Cron Worker service both within the cluster and externally using port forwarding.
+
+By following this guide, you will be able to deploy the Cron Worker in your Kubernetes environment, integrate it with your PostgreSQL database, and ensure it is fully operational to handle scheduled jobs and tasks effectively.
+
 ## Steps
 ### Add/Update the Helm Repository (Remote)
 ```bash

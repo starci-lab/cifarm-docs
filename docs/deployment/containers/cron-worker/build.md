@@ -1,11 +1,12 @@
 ---
 title: "Build"
 sidebar_position: 1
-description: This section guides you through building the Gameplay Service in your Kubernetes environment using Helm.
+description: This section guides you through building the Cron Worker in your Kubernetes environment using Helm.
 ---
-# Gameplay Service Build
+# Cron Worker Build
 ## Introduction
-In this section, we will guide you through the process of building and deploying the Gameplay Service within your Kubernetes environment. This service is responsible for handling the gameplay-related functionalities of the application. We will cover all the necessary steps including setting up the Helm repository, creating the required namespaces, setting environment variables, and installing the service using Helm charts.
+In this section, we provide a step-by-step guide to building and deploying the Cron Worker in your Kubernetes environment. This service is responsible for executing scheduled tasks and background jobs critical to the application's functionality. The guide includes instructions for configuring the Helm repository, creating namespaces, setting environment variables, and deploying the service using Helm charts to ensure efficient and reliable operation.
+
 ## Steps
 ### Add/Update the Helm Repository (Remote)
 ```bash
@@ -24,7 +25,7 @@ fi
 ```
 ### Create namespace
 ```bash
-kubectl create namespace gameplay-service-build
+kubectl create namespace cron-worker-build
 ```
 ### Create environments
 ```bash
@@ -39,7 +40,7 @@ export GAMEPLAY_TEST_POSTGRES_PORT=5432
 export GAMEPLAY_TEST_POSTGRES_USER=postgres
 export GAMEPLAY_TEST_POSTGRES_PASS=Cuong123_A
 
-# Gameplay Service
+# Cron Worker
 export GAMEPLAY_SERVICE_HOST=localhost
 export GAMEPLAY_SERVICE_PORT=3014
 
@@ -52,11 +53,11 @@ export DOCKER_PASSWORD="*****"
 export DOCKER_EMAIL="cifarm.starcilab@gmail.com"
 ```
 ### Install
-You can install `gameplay-service-build` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
+You can install `cron-worker-build` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
 #### Option 1: Install Using a URL for the values.yaml File
 ```bash
-helm install gameplay-service-build cifarm/gameplay-service-build
-    --set namespace gameplay-service-build
+helm install cron-worker-build cifarm/cron-worker-build
+    --set namespace cron-worker-build
     --set secret.imageCredentials.registry=$DOCKER_SERVER
     --set secret.imageCredentials.username=$DOCKER_USERNAME
     --set secret.imageCredentials.password=$DOCKER_PASSWORD
@@ -64,8 +65,8 @@ helm install gameplay-service-build cifarm/gameplay-service-build
 ```
 #### Option 2: Install Using a Local Path for the values.yaml File
 ```bash
-helm install gameplay-service-build ./charts/repo/containers/gameplay-service/build/
-    --set namespace gameplay-service-build
+helm install cron-worker-build ./charts/repo/containers/cron-worker/build/
+    --set namespace cron-worker-build
     --set secret.imageCredentials.registry=$DOCKER_SERVER
     --set secret.imageCredentials.username=$DOCKER_USERNAME
     --set secret.imageCredentials.password=$DOCKER_PASSWORD

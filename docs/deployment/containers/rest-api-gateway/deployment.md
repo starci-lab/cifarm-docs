@@ -5,11 +5,12 @@ description: This section guides you through building the Rest API Gateway in yo
 ---
 # Rest API Gateway Deployment
 ## Introduction
-In this section, we will walk through the steps necessary to deploy the Rest API Gateway in your Kubernetes environment. The Rest API Gateway is a key component of the application, responsible for handling gameplay-related operations. We will guide you through adding and updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and finally, deploying the service using Helm.
+This section provides a detailed guide for deploying the REST API Gateway in your Kubernetes environment. As a vital component of the application, the REST API Gateway serves as the central entry point for routing and managing API requests. This guide will walk you through adding or updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and deploying the service using Helm charts.
 
-The deployment process includes setting up necessary configurations, such as database connection details, and then installing the service using Helm charts. Once the service is deployed, we will also provide instructions for accessing the service both within the cluster and externally via port forwarding.
+The deployment process involves setting up necessary configurations, such as database connection details, and installing the service with appropriate Helm values. After deployment, instructions are provided for accessing the REST API Gateway both within the Kubernetes cluster and externally using port forwarding.
 
-By following these steps, you'll be able to set up and deploy the Rest API Gateway within your Kubernetes environment and configure it to work with the PostgreSQL database.
+By following this guide, you will successfully deploy the REST API Gateway in your Kubernetes environment, integrate it with the PostgreSQL database, and ensure it is fully operational to manage and route API traffic efficiently.
+
 ## Steps
 ### Add/Update the Helm Repository (Remote)
 ```bash

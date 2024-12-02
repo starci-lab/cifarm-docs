@@ -5,7 +5,8 @@ description: This section guides you through building the Gameplay Service in yo
 ---
 # Gameplay Service Build
 ## Introduction
-In this section, we will guide you through the process of building and deploying the Gameplay Service within your Kubernetes environment. This service is responsible for handling the gameplay-related functionalities of the application. We will cover all the necessary steps including setting up the Helm repository, creating the required namespaces, setting environment variables, and installing the service using Helm charts.
+In this section, we provide a detailed guide to building and deploying the Gameplay Service in your Kubernetes environment. This service is essential for managing gameplay-related functionalities within the application. The guide includes step-by-step instructions for configuring the Helm repository, creating namespaces, setting up environment variables, and deploying the service using Helm charts to ensure a smooth and efficient setup.
+
 ## Steps
 ### Add/Update the Helm Repository (Remote)
 ```bash

@@ -5,11 +5,12 @@ description: This section guides you through building the Cron Scheduler in your
 ---
 # Cron Scheduler Deployment
 ## Introduction
-In this section, we will walk through the steps necessary to deploy the Cron Scheduler in your Kubernetes environment. The Cron Scheduler is a key component of the application, responsible for handling gameplay-related operations. We will guide you through adding and updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and finally, deploying the service using Helm.
+In this section, we will guide you through the process of deploying the Cron Scheduler in your Kubernetes environment. The Cron Scheduler is a critical component of the application, responsible for managing and executing scheduled tasks efficiently. This guide covers all essential steps, including adding or updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and deploying the service using Helm charts.
 
-The deployment process includes setting up necessary configurations, such as database connection details, and then installing the service using Helm charts. Once the service is deployed, we will also provide instructions for accessing the service both within the cluster and externally via port forwarding.
+The deployment process involves setting up key configurations, such as database connection details, and installing the service with the appropriate Helm values. After deployment, we will provide instructions on how to access the service within the cluster and externally using port forwarding.
 
-By following these steps, you'll be able to set up and deploy the Cron Scheduler within your Kubernetes environment and configure it to work with the PostgreSQL database.
+By following this guide, you will successfully deploy the Cron Scheduler in your Kubernetes environment, integrate it with your PostgreSQL database, and ensure it is fully operational to handle scheduled tasks effectively.
+
 ## Steps
 ### Add/Update the Helm Repository (Remote)
 ```bash

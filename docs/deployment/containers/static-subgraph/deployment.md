@@ -5,11 +5,13 @@ description: This section guides you through building the Static Subgraph in you
 ---
 # Static Subgraph Deployment
 ## Introduction
-In this section, we will walk through the steps necessary to deploy the Static Subgraph in your Kubernetes environment. The Static Subgraph is a key component of the application, responsible for handling gameplay-related operations. We will guide you through adding and updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and finally, deploying the service using Helm.
 
-The deployment process includes setting up necessary configurations, such as database connection details, and then installing the service using Helm charts. Once the service is deployed, we will also provide instructions for accessing the service both within the cluster and externally via port forwarding.
+This section provides a step-by-step guide to deploying the Static Subgraph in your Kubernetes environment. The Static Subgraph is an essential component of the application, designed to manage and serve static data queries efficiently. This guide will walk you through adding or updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and deploying the service using Helm charts.
 
-By following these steps, you'll be able to set up and deploy the Static Subgraph within your Kubernetes environment and configure it to work with the PostgreSQL database.
+The deployment process includes configuring key settings, such as database connection details, and installing the service with the appropriate Helm values. After deployment, we will also provide instructions on accessing the Static Subgraph service both within the Kubernetes cluster and externally using port forwarding.
+
+By following this guide, you will successfully deploy the Static Subgraph in your Kubernetes environment, integrate it with the PostgreSQL database, and ensure it is fully functional to handle static data queries effectively.
+
 ## Steps
 ### Add/Update the Helm Repository (Remote)
 ```bash

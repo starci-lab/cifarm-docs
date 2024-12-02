@@ -1,11 +1,12 @@
 ---
 title: "Build"
 sidebar_position: 1
-description: This section guides you through building the Gameplay Service in your Kubernetes environment using Helm.
+description: This section guides you through building the Static Subgraph in your Kubernetes environment using Helm.
 ---
-# Gameplay Service Build
+# Static Subgraph Build
 ## Introduction
-In this section, we will guide you through the process of building and deploying the Gameplay Service within your Kubernetes environment. This service is responsible for handling the gameplay-related functionalities of the application. We will cover all the necessary steps including setting up the Helm repository, creating the required namespaces, setting environment variables, and installing the service using Helm charts.
+In this section, we provide a step-by-step guide to building and deploying the Static Subgraph in your Kubernetes environment. This service is designed to handle static data queries and supports efficient and reliable data access for the application. The guide covers all essential steps, including configuring the Helm repository, setting up namespaces, defining necessary environment variables, and deploying the service using Helm charts.
+
 ## Steps
 ### Add/Update the Helm Repository (Remote)
 ```bash
@@ -24,7 +25,7 @@ fi
 ```
 ### Create namespace
 ```bash
-kubectl create namespace gameplay-service-build
+kubectl create namespace static-subgraph-build
 ```
 ### Create environments
 ```bash
@@ -39,7 +40,7 @@ export GAMEPLAY_TEST_POSTGRES_PORT=5432
 export GAMEPLAY_TEST_POSTGRES_USER=postgres
 export GAMEPLAY_TEST_POSTGRES_PASS=Cuong123_A
 
-# Gameplay Service
+# Static Subgraph
 export GAMEPLAY_SERVICE_HOST=localhost
 export GAMEPLAY_SERVICE_PORT=3014
 
@@ -52,11 +53,11 @@ export DOCKER_PASSWORD="*****"
 export DOCKER_EMAIL="cifarm.starcilab@gmail.com"
 ```
 ### Install
-You can install `gameplay-service-build` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
+You can install `static-subgraph-build` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
 #### Option 1: Install Using a URL for the values.yaml File
 ```bash
-helm install gameplay-service-build cifarm/gameplay-service-build
-    --set namespace gameplay-service-build
+helm install static-subgraph-build cifarm/static-subgraph-build
+    --set namespace static-subgraph-build
     --set secret.imageCredentials.registry=$DOCKER_SERVER
     --set secret.imageCredentials.username=$DOCKER_USERNAME
     --set secret.imageCredentials.password=$DOCKER_PASSWORD
@@ -64,8 +65,8 @@ helm install gameplay-service-build cifarm/gameplay-service-build
 ```
 #### Option 2: Install Using a Local Path for the values.yaml File
 ```bash
-helm install gameplay-service-build ./charts/repo/containers/gameplay-service/build/
-    --set namespace gameplay-service-build
+helm install static-subgraph-build ./charts/repo/containers/static-subgraph/build/
+    --set namespace static-subgraph-build
     --set secret.imageCredentials.registry=$DOCKER_SERVER
     --set secret.imageCredentials.username=$DOCKER_USERNAME
     --set secret.imageCredentials.password=$DOCKER_PASSWORD

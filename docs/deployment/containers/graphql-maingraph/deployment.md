@@ -5,11 +5,12 @@ description: This section guides you through building the GraphQL Maingraph in y
 ---
 # GraphQL Maingraph Deployment
 ## Introduction
-In this section, we will walk through the steps necessary to deploy the GraphQL Maingraph in your Kubernetes environment. The GraphQL Maingraph is a key component of the application, responsible for handling gameplay-related operations. We will guide you through adding and updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and finally, deploying the service using Helm.
+This section provides a comprehensive guide to deploying the GraphQL Maingraph in your Kubernetes environment. As a central component of the application, the GraphQL Maingraph is responsible for managing and aggregating GraphQL queries to support gameplay-related operations. This guide will take you through the process of adding or updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and deploying the service using Helm charts.
 
-The deployment process includes setting up necessary configurations, such as database connection details, and then installing the service using Helm charts. Once the service is deployed, we will also provide instructions for accessing the service both within the cluster and externally via port forwarding.
+The deployment steps include configuring essential settings, such as database connection details, and installing the service with the appropriate Helm values. After deployment, we will provide instructions on how to access the GraphQL Maingraph service both within the cluster and externally using port forwarding.
 
-By following these steps, you'll be able to set up and deploy the GraphQL Maingraph within your Kubernetes environment and configure it to work with the PostgreSQL database.
+By following this guide, you will successfully deploy the GraphQL Maingraph in your Kubernetes environment, integrate it with the PostgreSQL database, and ensure it is fully functional to handle GraphQL operations efficiently.
+
 ## Steps
 ### Add/Update the Helm Repository (Remote)
 ```bash
