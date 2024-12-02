@@ -3,7 +3,7 @@ title: "Build"
 sidebar_position: 1
 description: This section guides you through building the Graphql Maingraph in your Kubernetes environment using Helm.
 ---
-# Graphql Maingraph Build
+# GraphQL Maingraph Build
 ## Introduction
 In this section, we provide a comprehensive guide to building and deploying the GraphQL Maingraph in your Kubernetes environment. This service is a core component responsible for managing and aggregating GraphQL queries, enabling seamless interaction with various data sources within your application. The guide covers all the necessary steps, including configuring the Helm repository, setting up namespaces, defining environment variables, and deploying the service using Helm charts to ensure robust and efficient GraphQL operations.
 

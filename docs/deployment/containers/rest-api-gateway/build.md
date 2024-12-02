@@ -3,7 +3,7 @@ title: "Build"
 sidebar_position: 1
 description: This section guides you through building the Rest Api Gateway in your Kubernetes environment using Helm.
 ---
-# Rest Api Gateway Build
+# Rest API Gateway Build
 ## Introduction
 In this section, we provide a step-by-step guide to building and deploying the REST API Gateway in your Kubernetes environment. This service acts as a central entry point for managing API requests and routing them to the appropriate services within your application. The guide includes detailed instructions for configuring the Helm repository, setting up namespaces, defining necessary environment variables, and deploying the service using Helm charts to ensure efficient and reliable API management.
 ## Steps
