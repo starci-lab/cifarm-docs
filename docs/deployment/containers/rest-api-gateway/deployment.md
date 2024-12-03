@@ -29,17 +29,16 @@ fi
 ```
 ### Create namespace
 ```bash
-kubectl create namespace rest-api-gateway-deployment
+kubectl create namespace rest-api-gateway
 ```
 ### Create environments
 ```bash
 
 # Gameplay Service configuration
-export GAMEPLAY_SERVICE_HOST=localhost
+export GAMEPLAY_SERVICE_HOST=gameplay-service-cluster-ip.containers.svc.cluster.local
 export GAMEPLAY_SERVICE_PORT=3014
 
 # Rest Api Gateway configuration
-export REST_API_GATEWAY_HOST=localhost
 export REST_API_GATEWAY_PORT=3001
 
 ```
@@ -48,8 +47,8 @@ export REST_API_GATEWAY_PORT=3001
 You can install `rest-api-gateway-build` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
 #### Option 1: Install Using a URL for the values.yaml File
 ```bash
-helm install rest-api-gateway-deployment cifarm/rest-api-gateway-deployment
-    --set namespace rest-api-gateway-deployment
+helm install rest-api-gateway cifarm/rest-api-gateway
+    --namespace rest-api-gateway
     --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME
     --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST
     --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT
@@ -59,7 +58,7 @@ helm install rest-api-gateway-deployment cifarm/rest-api-gateway-deployment
 ```
 #### Option 2: Install Using a Local Path for the values.yaml File
 ```bash
-helm install rest-api-gateway-deployment ./charts/repo/containers/rest-api-gateway/build/
+helm install rest-api-gateway-deployment ./charts/repo/containers/rest-api-gateway/deployment/
     --set namespace rest-api-gateway-deployment
     --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME
     --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST

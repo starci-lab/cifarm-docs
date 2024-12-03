@@ -29,32 +29,36 @@ fi
 ```
 ### Create namespace
 ```bash
-kubectl create namespace gameplay-service-deployment
+kubectl create namespace containers
 ```
 ### Create environments
 ```bash
 # Redis cache configuration
-export CACHE_REDIS_HOST=localhost
-export CACHE_REDIS_PORT=6379
+CACHE_REDIS_HOST=cache-redis-master.databases.svc.cluster.local
+CACHE_REDIS_PORT=6379
 
 # Gameplay Test Postgres configuration
-export GAMEPLAY_TEST_POSTGRES_DBNAME=cifarm_test
-export GAMEPLAY_TEST_POSTGRES_HOST=127.0.0.1
-export GAMEPLAY_TEST_POSTGRES_PORT=5432
-export GAMEPLAY_TEST_POSTGRES_USER=postgres
-export GAMEPLAY_TEST_POSTGRES_PASS=Cuong123_A
+GAMEPLAY_POSTGRES_DBNAME=cifarm
+GAMEPLAY_POSTGRES_HOST=gameplay-postgresql-postgresql-ha-pgpool.database.svc.cluster.local
+GAMEPLAY_POSTGRES_PORT=5432
+GAMEPLAY_POSTGRES_USER=postgres
+GAMEPLAY_POSTGRES_PASS=******
 
 # Gameplay Service
-export GAMEPLAY_SERVICE_HOST=localhost
-export GAMEPLAY_SERVICE_PORT=3014
+GAMEPLAY_SERVICE_PORT=3014
 
 # Kafka
-export KAFKA_BROKER_1_HOST=localhost
-export KAFKA_BROKER_1_PORT=9092
-export KAFKA_BROKER_2_HOST=localhost
-export KAFKA_BROKER_2_PORT=9093
-export KAFKA_BROKER_3_HOST=localhost
-export KAFKA_BROKER_3_PORT=9094
+KAFKA_BROKER_1_HOST=kafka-controller-0.kafka-controller-headless.brokers.svc.cluster.local
+KAFKA_BROKER_1_PORT=9092
+KAFKA_BROKER_2_HOST=kafka-controller-1.kafka-controller-headless.brokers.svc.cluster.local
+KAFKA_BROKER_2_PORT=9092
+KAFKA_BROKER_3_HOST=kafka-controller-2.kafka-controller-headless.brokers.svc.cluster.local
+KAFKA_BROKER_3_PORT=9092
+
+# JWT
+JWT_SECRET="C3ZofmtZ+hXQF2d~&bBu9x'UtkUyz?)MwXiXy_eGFlyO|:v!JW$?iZ&U6:kPQg("
+JWT_ACCESS_TOKEN_EXPIRATION=5m
+JWT_REFRESH_TOKEN_EXPIRATION=7d
 
 ```
 
@@ -62,33 +66,80 @@ export KAFKA_BROKER_3_PORT=9094
 You can install `gameplay-service-build` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
 #### Option 1: Install Using a URL for the values.yaml File
 ```bash
-helm install gameplay-service-deployment cifarm/gameplay-service-deployment
-    --set namespace gameplay-service-deployment
-    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME
-    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST
-    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT
-    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER
-    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS
+helm install gameplay-service cifarm/gameplay-service \
+    --namespace containers \
+    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME \
+    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST \
+    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT \
+    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER \
+    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS \
+    --set secret.env.redis.cache.host=$CACHE_REDIS_HOST \
+    --set secret.env.redis.cache.port=$CACHE_REDIS_PORT \
+    --set secret.env.kafka.broker1.host=$KAFKA_BROKER_1_HOST \
+    --set secret.env.kafka.broker1.port=$KAFKA_BROKER_1_PORT \
+    --set secret.env.kafka.broker2.host=$KAFKA_BROKER_2_HOST \
+    --set secret.env.kafka.broker2.port=$KAFKA_BROKER_2_PORT \
+    --set secret.env.kafka.broker3.host=$KAFKA_BROKER_3_HOST \
+    --set secret.env.kafka.broker3.port=$CKAFKA_BROKER_3_PORT \
+    --set secret.env.jwt.secret=$JWT_SECRET \
+    --set secret.env.jwt.accessTokenExpiration=$JWT_ACCESS_TOKEN_EXPIRATION \
+    --set secret.env.jwt.refreshTokenExpiration=$JWT_REFRESH_TOKEN_EXPIRATION \
+    --set secret.env.containers.gameplayService.port=$GAMEPLAY_SERVICE_PORT
 
 ```
 #### Option 2: Install Using a Local Path for the values.yaml File
 ```bash
-helm install gameplay-service-deployment ./charts/repo/containers/gameplay-service/build/
-    --set namespace gameplay-service-deployment
-    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME
-    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST
-    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT
-    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER
-    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS
+helm install gameplay-service ./charts/repo/containers/gameplay-service/deployment/ \
+    --namespace containers \
+    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME \
+    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST \
+    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT \
+    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER \
+    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS \
+    --set secret.env.redis.cache.host=$CACHE_REDIS_HOST \
+    --set secret.env.redis.cache.port=$CACHE_REDIS_PORT \
+    --set secret.env.kafka.broker1.host=$KAFKA_BROKER_1_HOST \
+    --set secret.env.kafka.broker1.port=$KAFKA_BROKER_1_PORT \
+    --set secret.env.kafka.broker2.host=$KAFKA_BROKER_2_HOST \
+    --set secret.env.kafka.broker2.port=$KAFKA_BROKER_2_PORT \
+    --set secret.env.kafka.broker3.host=$KAFKA_BROKER_3_HOST \
+    --set secret.env.kafka.broker3.port=$CKAFKA_BROKER_3_PORT \
+    --set secret.env.jwt.secret=$JWT_SECRET \
+    --set secret.env.jwt.accessTokenExpiration=$JWT_ACCESS_TOKEN_EXPIRATION \
+    --set secret.env.jwt.refreshTokenExpiration=$JWT_REFRESH_TOKEN_EXPIRATION \
+    --set secret.env.containers.gameplayService.port=$GAMEPLAY_SERVICE_PORT
 ```
+### Check Deployment
+```bash
+kubectl get deployment gameplay-service -n containers
+```
+### Check Pod
+#### Get
+```bash
+kubectl get pods -n containers
+```
+#### Describe
+```bash
+kubectl describe pods gameplay-service-xxxxxxxx  -n containers
+```
+#### Logs
+```bash
+kubectl describe logs gameplay-service-xxxxxxxx  -n containers
+```
+### Uninstall
+```bash
+helm uninstall gameplay-service -n containers
+```
+
 ## Access
 ### Gameplay Service
 - **Kind**: Service  
 - **Type**: ClusterIP  
-- **Host**: `gameplay-service-cluster-ip.gameplay-service-deployment.svc.cluster.local`  
+- **Host**: `gameplay-service-cluster-ip.containers.svc.cluster.local`  
 - **Port**: 3014
 To forward the port for local access, use the following command
 ```bash
 # Forward port for Gameplay PostgreSQL
-kubectl port-forward svc/gameplay-service-cluster-ip --namespace gameplay-service-deployment 3014:3014
+kubectl port-forward svc/gameplay-service-cluster-ip --namespace containers 3014:3014
 ```
+
