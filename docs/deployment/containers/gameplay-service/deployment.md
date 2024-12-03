@@ -39,7 +39,7 @@ CACHE_REDIS_PORT=6379
 
 # Gameplay Test Postgres configuration
 GAMEPLAY_POSTGRES_DBNAME=cifarm
-GAMEPLAY_POSTGRES_HOST=gameplay-postgresql-postgresql-ha-pgpool.database.svc.cluster.local
+GAMEPLAY_POSTGRES_HOST=gameplay-postgresql-postgresql-ha-pgpool.databases.svc.cluster.local
 GAMEPLAY_POSTGRES_PORT=5432
 GAMEPLAY_POSTGRES_USER=postgres
 GAMEPLAY_POSTGRES_PASS=******
