@@ -5,32 +5,42 @@ description: "Guide for installing Kafka"
 ---
 # Kafka
 ## Introduction
-Kafka is a distributed event streaming platform used for building real-time data pipelines and streaming applications. It is highly scalable and fault-tolerant, making it ideal for managing large volumes of data. Kafka uses topics to categorize streams of data and provides a publish-subscribe model for data consumption.
+This guide outlines the steps for installing **Apache Kafka** on your Kubernetes cluster using the Bitnami Helm chart. Kafka is a distributed event streaming platform, commonly used for building real-time data pipelines and streaming applications.
 ## Steps
-### Add the Bitnami Helm Repository
+### Add the Bitnami helm repository
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
-### Install
-You can install `kafka` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
-#### Option 1: Install Using a URL for the values.yaml File
+### Execute scripts
+#### 1. Install
 ```bash
 helm install kafka bitnami/kafka \
     --namespace brokers \
-    -f https://starci-lab.github.io/cifarm-k8s/bitnami/brokers/kafka/values.yaml
+    --set listeners.client.protocol="PLAINTEXT" \
+    --set listeners.controller.protocol="PLAINTEXT" \
+    --set controller.resources.requests.cpu="10m" \
+    --set controller.resources.requests.memory="20Mi" \
+    --set controller.resources.limits.cpu="100m" \
+    --set controller.resources.limits.memory="200Mi"
 ```
-#### Option 2: Install Using a Local Path for the values.yaml File
+#### 2. Uninstall
 ```bash
-helm install kafka bitnami/kafka \
-    --namespace brokers \
-    -f ./bitnami/brokers/kafka/values.yaml
-``` 
+helm uninstall kafka -n brokers
+```
 ## Access
-### Kafka
+### Kafka Headless
 - **Kind**: Service  
-- **Type**: ClusterIP (Headless)  
+- **Type**: ClusterIP
 - **Hosts**: 
     - `kafka-controller-0.kafka-controller-headless.brokers.svc.cluster.local`
     - `kafka-controller-1.kafka-controller-headless.brokers.svc.cluster.local`
     - `kafka-controller-2.kafka-controller-headless.brokers.svc.cluster.local`
 - **Port**: 9092
+- **Note**: Producer only
+### Kafka
+- **Kind**: Service  
+- **Type**: ClusterIP
+- **Broker**: 
+    - `kafka.brokers.svc.cluster.local`
+- **Port**: 9092    
+- **Note**: Producer & Consumer

@@ -5,68 +5,53 @@ description: "Guide for installing Gameplay PostgreSQL"
 ---
 # Gameplay PostgreSQL Database
 ## Introduction
-This guide outlines the steps to deploy a Gameplay PostgreSQL Database using the Bitnami PostgreSQL High Availability (HA) Helm Chart in a Kubernetes environment. PostgreSQL is a powerful, open-source relational database system, and with Bitnami's Helm chart, you can easily deploy a highly available, fault-tolerant PostgreSQL setup with replication and automatic failover.
+This guide will walk you through the process of setting up the **Gameplay PostgreSQL** database using the Bitnami PostgreSQL HA Helm chart. It covers everything from adding the necessary Helm repositories to configuring and installing the PostgreSQL setup, as well as uninstalling it if needed.
 
-The purpose of this deployment is to provide a robust database solution for storing gameplay data, such as player profiles, game states, scores, and more, in a Kubernetes-based infrastructure. By leveraging Kubernetes and Helm, you can automate the installation, scaling, and management of your PostgreSQL database with minimal manual intervention.
-
-In the following sections, we will walk through the necessary steps to configure and deploy the database, customize key settings, and ensure that the database is accessible from other applications within the same Kubernetes cluster.
 ## Steps
-### Add the Bitnami Helm Repository
+### Add the Bitnami helm repository
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
-### Create namespace
+### Set environments
 ```bash
-kubectl create namespace gameplay-postgresql
+export POSTGRES_DBNAME=gameplay
+export POSTGRES_USER=cifarm
+export POSTGRES_PASS=UqW1R2J7UhKv6Aqf
 ```
-### Set Environments
-```bash
-export GAMEPLAY_POSTGRES_DBNAME="gameplay"
-export GAMEPLAY_POSTGRES_PORT="5432"
-export GAMEPLAY_POSTGRES_PASS="Cuong123_A"
-```
-### Install
-You can install `gameplay-postgresql` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
-#### Option 1: Install Using a URL for the values.yaml File
+### Excecute scripts
+#### 1. Install
 ```bash
 helm install gameplay-postgresql bitnami/postgresql-ha \
-    --namespace gameplay-postgresql \
-    -f https://starci-lab.github.io/cifarm-k8s/bitnami/databases/gameplay-postgresql/values.yaml \
-    --set global.postgresql.password=$GAMEPLAY_POSTGRES_PASS \
-    --set global.postgresql.repmgrPassword=$GAMEPLAY_POSTGRES_PASS \
-    --set global.postgresql.database=$GAMEPLAY_POSTGRES_DBNAME \
-    --set global.postgresql.repmgrDatabase=$GAMEPLAY_POSTGRES_DBNAME \
-    --set postgresql.containerPorts.postgresql=$GAMEPLAY_POSTGRES_PORT
+    --namespace databases \
+    --set global.postgresql.username=$POSTGRES_USER \
+    --set global.postgresql.database=$POSTGRES_DBNAME \
+    --set global.postgresql.password=$POSTGRES_PASS \
+    --set global.postgresql.repmgrUsername=$POSTGRES_USER \
+    --set global.postgresql.repmgrDatabase=$POSTGRES_DBNAME \
+    --set global.postgresql.repmgrPassword=$POSTGRES_PASS \
+    --set pgpool.resources.requests.cpu="10m" \
+    --set pgpool.resources.requests.memory="20Mi" \
+    --set pgpool.resources.limits.cpu="100m" \
+    --set pgpool.resources.limits.memory="200Mi" \
+    --set postgresql.resources.requests.cpu="20m" \
+    --set postgresql.resources.requests.memory="40Mi" \
+    --set postgresql.resources.limits.cpu="200m" \
+    --set postgresql.resources.limits.memory="400Mi" \
+    --set witness.resources.requests.cpu="10m" \
+    --set witness.resources.requests.memory="20Mi" \
+    --set witness.resources.limits.cpu="100m" \
+    --set witness.resources.limits.memory="200Mi"
 ```
-#### Option 2: Install Using a Local Path for the values.yaml File
+#### 2. Uninstall
 ```bash
-# Clone the repository
-git clone https://github.com/starci-lab/cifarm-k8s.git
-cd cifarm-k8s
-
-# Install the chart
-helm install gameplay-postgresql bitnami/postgresql-ha \
-    --namespace gameplay-postgresql \
-    -f ./bitnami/databases/gameplay-postgresql/values.yaml \
-    --set global.postgresql.password=$GAMEPLAY_POSTGRES_PASS \
-    --set global.postgresql.repmgrPassword=$GAMEPLAY_POSTGRES_PASS \
-    --set global.postgresql.database=$GAMEPLAY_POSTGRES_DBNAME \
-    --set global.postgresql.repmgrDatabase=$GAMEPLAY_POSTGRES_DBNAME \
-    --set postgresql.containerPorts.postgresql=$GAMEPLAY_POSTGRES_PORT
+helm uninstall gameplay-postgresql --namespace databases
+#If passwords is not specified, careful to use
+kubectl delete pvc --all --namespace databases
 ```
 ## Access 
-### PgPool
+### Gameplay PgPool
 - **Kind**: Service  
 - **Type**: ClusterIP  
-- **Host**: `gameplay-postgresql-postgresql-ha-pgpool.gameplay-postgresql.svc.cluster.local`  
+- **Host**: `gameplay-postgresql-postgresql-ha-pgpool.databases.svc.cluster.local`  
 - **Port**: 5432
-
-To forward the port for local access, use the following command
-```bash
-# Forward port for Gameplay PostgreSQL
-kubectl port-forward svc/gameplay-postgresql-postgresql-ha-pgpool \
---namespace monitoring 5432:5432
-
-# Connect to PostgreSQL Database
-PGPASSWORD=Cuong123_A psql -h 127.0.0.1 -p 5432 -d gameplay
-```
+- **Note**: Write & Read
