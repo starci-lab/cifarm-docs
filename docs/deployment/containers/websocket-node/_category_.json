@@ -1,0 +1,8 @@
+{
+    "label": "Websocket Node",
+    "position": 8,       
+    "link": {
+        "type": "generated-index",
+        "description": "Guides for deploying Websocket Node into K8S Cluster"
+    }
+}
