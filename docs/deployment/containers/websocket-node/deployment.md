@@ -68,11 +68,16 @@ helm install websocket-node cifarm/websocket-node \
     --set secret.env.redis.cache.port=$CACHE_REDIS_PORT \
     --set secret.env.redis.adapter.host=$ADAPTER_REDIS_HOST \
     --set secret.env.redis.adapter.port=$ADAPTER_REDIS_PORT \
+    --set secret.env.containers.websocketApiGateway.port=$WEBSOCKET_API_GATEWAY_PORT \
+    --set deployment.resources.requests.cpu="10m" \
+    --set deployment.resources.requests.memory="20Mi" \
+    --set deployment.resources.limits.cpu="100m" \
+    --set deployment.resources.limits.memory="200Mi"
 
 ```
 #### Option 2: Install Using a Local Path for the values.yaml File
 ```bash
-helm install websocket-node ./charts/repo/containers/websocket-node/deployment/
+helm install websocket-node ./charts/repo/containers/websocket-node/deployment/ \
     --namespace containers \
     --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME \
     --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST \
@@ -83,16 +88,43 @@ helm install websocket-node ./charts/repo/containers/websocket-node/deployment/
     --set secret.env.redis.cache.port=$CACHE_REDIS_PORT \
     --set secret.env.redis.adapter.host=$ADAPTER_REDIS_HOST \
     --set secret.env.redis.adapter.port=$ADAPTER_REDIS_PORT \
+    --set secret.env.containers.websocketApiGateway.port=$WEBSOCKET_API_GATEWAY_PORT \
+    --set deployment.resources.requests.cpu="10m" \
+    --set deployment.resources.requests.memory="20Mi" \
+    --set deployment.resources.limits.cpu="100m" \
+    --set deployment.resources.limits.memory="200Mi"
 
 ```
+### Check Deployment
+```bash
+kubectl get deployment websocket-node -n containers
+```
+### Check Pod
+#### Get
+```bash
+kubectl get pods -n containers
+```
+#### Describe
+```bash
+kubectl describe pods websocket-node-xxxxxxxx  -n containers
+```
+#### Logs
+```bash
+kubectl logs websocket-node-xxxxxxxx  -n containers
+```
+### Uninstall
+```bash
+helm uninstall websocket-node -n containers
+```
+
 ## Access
 ### Websocket Node
 - **Kind**: Service  
 - **Type**: ClusterIP  
-- **Host**: `graphql-maingraph-cluster-ip.websocket-node.svc.cluster.local`  
-- **Port**: 3014
+- **Host**: `websocket-node-cluster-ip.containers.svc.cluster.local`  
+- **Port**: 3003
 To forward the port for local access, use the following command
 ```bash
 # Forward port for Gameplay PostgreSQL
-kubectl port-forward svc/graphql-maingraph-cluster-ip --namespace websocket-node 3014:3014
+kubectl port-forward svc/websocket-node-cluster-ip --namespace containers 3003:3003
 ```
