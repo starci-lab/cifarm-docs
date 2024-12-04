@@ -28,59 +28,71 @@ fi
 ```
 ### Create namespace
 ```bash
-kubectl create namespace graphql-maingraph-deployment
+kubectl create namespace containers
 ```
 ### Create environments
 ```bash
 
 # Adapter Redis
-export ADAPTER_REDIS_HOST=localhost
-export ADAPTER_REDIS_PORT=6379
+ADAPTER_REDIS_HOST=adapter-redis-master.databases.svc.cluster.local
+ADAPTER_REDIS_PORT=6379
 
-# Gameplay Test Postgres configuration
-export GAMEPLAY_TEST_POSTGRES_DBNAME=cifarm_test
-export GAMEPLAY_TEST_POSTGRES_HOST=127.0.0.1
-export GAMEPLAY_TEST_POSTGRES_PORT=5432
-export GAMEPLAY_TEST_POSTGRES_USER=postgres
-export GAMEPLAY_TEST_POSTGRES_PASS=Cuong123_A
+# Redis cache configuration
+CACHE_REDIS_HOST=cache-redis-master.databases.svc.cluster.local
+CACHE_REDIS_PORT=6379
 
-# Cache Redis
-export CACHE_REDIS_HOST=127.0.0.1
-export CACHE_REDIS_PORT=6379
+# Gameplay Postgres configuration
+GAMEPLAY_POSTGRES_DBNAME=cifarm
+GAMEPLAY_POSTGRES_HOST=gameplay-postgresql-postgresql-ha-pgpool.database.svc.cluster.local
+GAMEPLAY_POSTGRES_PORT=5432
+GAMEPLAY_POSTGRES_USER=postgres
+GAMEPLAY_POSTGRES_PASS=******
+
+# Websocket Node Service
+WEBSOCKET_API_GATEWAY_PORT=3003
 
 ```
 
 ### Install
-You can install `graphql-maingraph-build` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
+You can install `websocket-node` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
 #### Option 1: Install Using a URL for the values.yaml File
 ```bash
-helm install graphql-maingraph-deployment cifarm/graphql-maingraph-deployment
-    --set namespace graphql-maingraph-deployment
-    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME
-    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST
-    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT
-    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER
-    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS
+helm install websocket-node cifarm/websocket-node \
+    --namespace containers \
+    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME \
+    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST \
+    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT \
+    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER \
+    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS \
+    --set secret.env.redis.cache.host=$CACHE_REDIS_HOST \
+    --set secret.env.redis.cache.port=$CACHE_REDIS_PORT \
+    --set secret.env.redis.adapter.host=$ADAPTER_REDIS_HOST \
+    --set secret.env.redis.adapter.port=$ADAPTER_REDIS_PORT \
 
 ```
 #### Option 2: Install Using a Local Path for the values.yaml File
 ```bash
-helm install graphql-maingraph-deployment ./charts/repo/containers/graphql-maingraph/build/
-    --set namespace graphql-maingraph-deployment
-    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME
-    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST
-    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT
-    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER
-    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS
+helm install websocket-node ./charts/repo/containers/websocket-node/deployment/
+    --namespace containers \
+    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME \
+    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST \
+    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT \
+    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER \
+    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS \
+    --set secret.env.redis.cache.host=$CACHE_REDIS_HOST \
+    --set secret.env.redis.cache.port=$CACHE_REDIS_PORT \
+    --set secret.env.redis.adapter.host=$ADAPTER_REDIS_HOST \
+    --set secret.env.redis.adapter.port=$ADAPTER_REDIS_PORT \
+
 ```
 ## Access
 ### Websocket Node
 - **Kind**: Service  
 - **Type**: ClusterIP  
-- **Host**: `graphql-maingraph-cluster-ip.graphql-maingraph-deployment.svc.cluster.local`  
+- **Host**: `graphql-maingraph-cluster-ip.websocket-node.svc.cluster.local`  
 - **Port**: 3014
 To forward the port for local access, use the following command
 ```bash
 # Forward port for Gameplay PostgreSQL
-kubectl port-forward svc/graphql-maingraph-cluster-ip --namespace graphql-maingraph-deployment 3014:3014
+kubectl port-forward svc/graphql-maingraph-cluster-ip --namespace websocket-node 3014:3014
 ```
