@@ -58,7 +58,7 @@ JWT_REFRESH_TOKEN_EXPIRATION=7d
 ```bash
 helm install gameplay-service cifarm/deployment \
     --namespace containers \
-    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME \
+    --set GAMEPLAY_POSTGRES_DBNAME=$GAMEPLAY_POSTGRES_DBNAME \
     --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST \
     --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT \
     --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER \

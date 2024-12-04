@@ -18,10 +18,10 @@ helm install kafka bitnami/kafka \
     --namespace brokers \
     --set listeners.client.protocol="PLAINTEXT" \
     --set listeners.controller.protocol="PLAINTEXT" \
-    --set controller.resources.requests.cpu="10m" \
-    --set controller.resources.requests.memory="20Mi" \
-    --set controller.resources.limits.cpu="100m" \
-    --set controller.resources.limits.memory="200Mi"
+    --set controller.resources.requests.cpu="20m" \
+    --set controller.resources.requests.memory="40Mi" \
+    --set controller.resources.limits.cpu="200m" \
+    --set controller.resources.limits.memory="400Mi"
 ```
 #### 2. Uninstall
 ```bash
