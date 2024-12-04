@@ -10,5 +10,5 @@ This guide helps you prepare your Kubernetes environment by creating the `traffi
 ## Steps
 ### Create namespace
 ```bash
-kubectl create namespace traffics
+kubectl create namespace traffic
 ```
