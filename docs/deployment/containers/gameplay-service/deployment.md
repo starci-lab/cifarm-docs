@@ -115,7 +115,7 @@ helm install gameplay-service ./charts/repo/deployment \
 ```
 #### 3. Check deployment
 ```bash
-kubectl get deployment gameplay-service -n containers
+kubectl get deployment gameplay-service-deployment -n containers
 ```
 #### 4. Check pods
 ```bash
