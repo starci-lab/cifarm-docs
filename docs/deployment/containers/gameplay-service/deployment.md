@@ -39,12 +39,14 @@ GAMEPLAY_POSTGRES_PASS=UqW1R2J7UhKv6Aqf
 GAMEPLAY_SERVICE_PORT=3014
 
 # Kafka
-KAFKA_BROKER_1_HOST=kafka-controller-0.kafka-controller-headless.brokers.svc.cluster.local
-KAFKA_BROKER_1_PORT=9092
-KAFKA_BROKER_2_HOST=kafka-controller-1.kafka-controller-headless.brokers.svc.cluster.local
-KAFKA_BROKER_2_PORT=9092
-KAFKA_BROKER_3_HOST=kafka-controller-2.kafka-controller-headless.brokers.svc.cluster.local
-KAFKA_BROKER_3_PORT=9092
+HEADLESS_KAFKA_1_HOST=kafka-controller-0.kafka-controller-headless.brokers.svc.cluster.local
+HEADLESS_KAFKA_1_PORT=9092
+HEADLESS_KAFKA_2_HOST=kafka-controller-1.kafka-controller-headless.brokers.svc.cluster.local 
+HEADLESS_KAFKA_2_PORT=9092
+HEADLESS_KAFKA_3_HOST=kafka-controller-2.kafka-controller-headless.brokers.svc.cluster.local
+HEADLESS_KAFKA_3_PORT=9092
+KAFKA_1_HOST=kafka.brokers.svc.cluster.local
+KAFKA_1_PORT=9092
 
 # JWT
 JWT_SECRET="C3ZofmtZ+hXQF2d~&bBu9x'UtkUyz?)MwXiXy_eGFlyO|:v!JW$?iZ&U6:kPQg("
@@ -58,24 +60,27 @@ JWT_REFRESH_TOKEN_EXPIRATION=7d
 ```bash
 helm install gameplay-service cifarm/deployment \
     --namespace containers \
-    --set GAMEPLAY_POSTGRES_DBNAME=$GAMEPLAY_POSTGRES_DBNAME \
-    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST \
-    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT \
-    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER \
-    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS \
-    --set secret.env.redis.cache.host=$CACHE_REDIS_HOST \
-    --set secret.env.redis.cache.port=$CACHE_REDIS_PORT \
-    --set secret.env.kafka.broker1.host=$KAFKA_BROKER_1_HOST \
-    --set secret.env.kafka.broker1.port=$KAFKA_BROKER_1_PORT \
-    --set secret.env.kafka.broker2.host=$KAFKA_BROKER_2_HOST \
-    --set secret.env.kafka.broker2.port=$KAFKA_BROKER_2_PORT \
-    --set secret.env.kafka.broker3.host=$KAFKA_BROKER_3_HOST \
-    --set secret.env.kafka.broker3.port=$CKAFKA_BROKER_3_PORT \
-    --set secret.env.jwt.secret=$JWT_SECRET \
-    --set secret.env.jwt.accessTokenExpiration=$JWT_ACCESS_TOKEN_EXPIRATION \
-    --set secret.env.jwt.refreshTokenExpiration=$JWT_REFRESH_TOKEN_EXPIRATION \
-    --set secret.env.containers.gameplayService.port=$GAMEPLAY_SERVICE_PORT
-
+    --set image.repository="cifarm/gameplay-service" \
+    --set image.tag="latest" \
+    --set env.CACHE_REDIS_HOST=$CACHE_REDIS_HOST \
+    --set env.CACHE_REDIS_PORT=$CACHE_REDIS_PORT \
+    --set env.GAMEPLAY_POSTGRES_DBNAME=$GAMEPLAY_POSTGRES_DBNAME \
+    --set env.GAMEPLAY_POSTGRES_HOST=$GAMEPLAY_POSTGRES_HOST \
+    --set env.GAMEPLAY_POSTGRES_PORT=$GAMEPLAY_POSTGRES_PORT \
+    --set env.GAMEPLAY_POSTGRES_USER=$GAMEPLAY_POSTGRES_USER \
+    --set env.GAMEPLAY_POSTGRES_PASS=$GAMEPLAY_POSTGRES_PASS \
+    --set env.GAMEPLAY_SERVICE_PORT=$GAMEPLAY_SERVICE_PORT \
+    --set env.HEADLESS_KAFKA_1_HOST=$HEADLESS_KAFKA_1_HOST \
+    --set env.HEADLESS_KAFKA_1_PORT=$HEADLESS_KAFKA_1_PORT \
+    --set env.HEADLESS_KAFKA_2_HOST=$HEADLESS_KAFKA_2_HOST \
+    --set env.HEADLESS_KAFKA_2_PORT=$HEADLESS_KAFKA_2_PORT \
+    --set env.HEADLESS_KAFKA_3_HOST=$HEADLESS_KAFKA_3_HOST \
+    --set env.HEADLESS_KAFKA_3_PORT=$HEADLESS_KAFKA_3_PORT \
+    --set env.KAFKA_1_HOST=$KAFKA_1_HOST \
+    --set env.KAFKA_1_PORT=$KAFKA_1_PORT \
+    --set env.JWT_SECRET="$JWT_SECRET" \
+    --set env.JWT_ACCESS_TOKEN_EXPIRATION=$JWT_ACCESS_TOKEN_EXPIRATION \
+    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION
 ```
 #### 2. Install (Local)
 ```bash
@@ -86,23 +91,27 @@ cd cifarm-k8s
 # Install
 helm install gameplay-service ./charts/repo/deployment \
     --namespace containers \
-    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME \
-    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST \
-    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT \
-    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER \
-    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS \
-    --set secret.env.redis.cache.host=$CACHE_REDIS_HOST \
-    --set secret.env.redis.cache.port=$CACHE_REDIS_PORT \
-    --set secret.env.kafka.broker1.host=$KAFKA_BROKER_1_HOST \
-    --set secret.env.kafka.broker1.port=$KAFKA_BROKER_1_PORT \
-    --set secret.env.kafka.broker2.host=$KAFKA_BROKER_2_HOST \
-    --set secret.env.kafka.broker2.port=$KAFKA_BROKER_2_PORT \
-    --set secret.env.kafka.broker3.host=$KAFKA_BROKER_3_HOST \
-    --set secret.env.kafka.broker3.port=$CKAFKA_BROKER_3_PORT \
-    --set secret.env.jwt.secret=$JWT_SECRET \
-    --set secret.env.jwt.accessTokenExpiration=$JWT_ACCESS_TOKEN_EXPIRATION \
-    --set secret.env.jwt.refreshTokenExpiration=$JWT_REFRESH_TOKEN_EXPIRATION \
-    --set secret.env.containers.gameplayService.port=$GAMEPLAY_SERVICE_PORT
+    --set image.repository="cifarm/gameplay-service" \
+    --set image.tag="latest" \
+    --set env.CACHE_REDIS_HOST=$CACHE_REDIS_HOST \
+    --set env.CACHE_REDIS_PORT=$CACHE_REDIS_PORT \
+    --set env.GAMEPLAY_POSTGRES_DBNAME=$GAMEPLAY_POSTGRES_DBNAME \
+    --set env.GAMEPLAY_POSTGRES_HOST=$GAMEPLAY_POSTGRES_HOST \
+    --set env.GAMEPLAY_POSTGRES_PORT=$GAMEPLAY_POSTGRES_PORT \
+    --set env.GAMEPLAY_POSTGRES_USER=$GAMEPLAY_POSTGRES_USER \
+    --set env.GAMEPLAY_POSTGRES_PASS=$GAMEPLAY_POSTGRES_PASS \
+    --set env.GAMEPLAY_SERVICE_PORT=$GAMEPLAY_SERVICE_PORT \
+    --set env.HEADLESS_KAFKA_1_HOST=$HEADLESS_KAFKA_1_HOST \
+    --set env.HEADLESS_KAFKA_1_PORT=$HEADLESS_KAFKA_1_PORT \
+    --set env.HEADLESS_KAFKA_2_HOST=$HEADLESS_KAFKA_2_HOST \
+    --set env.HEADLESS_KAFKA_2_PORT=$HEADLESS_KAFKA_2_PORT \
+    --set env.HEADLESS_KAFKA_3_HOST=$HEADLESS_KAFKA_3_HOST \
+    --set env.HEADLESS_KAFKA_3_PORT=$HEADLESS_KAFKA_3_PORT \
+    --set env.KAFKA_1_HOST=$KAFKA_1_HOST \
+    --set env.KAFKA_1_PORT=$KAFKA_1_PORT \
+    --set env.JWT_SECRET="$JWT_SECRET" \
+    --set env.JWT_ACCESS_TOKEN_EXPIRATION=$JWT_ACCESS_TOKEN_EXPIRATION \
+    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION
 ```
 #### 3. Check deployment
 ```bash
@@ -114,10 +123,8 @@ kubectl get deployment gameplay-service -n containers
 kubectl get pods -n containers
 # Describe a single pod
 kubectl describe pods gameplay-service-xxxxxxxx  -n containers
-```
-#### Logs
-```bash
-kubectl describe logs gameplay-service-xxxxxxxx  -n containers
+# Log a single pod
+kubectl logs gameplay-service-xxxxxxxx  -n containers
 ```
 #### 5. Uninstall helm
 ```bash
