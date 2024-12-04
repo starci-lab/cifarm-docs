@@ -26,10 +26,10 @@ helm install gameplay-postgresql bitnami/postgresql-ha \
     --set global.postgresql.password=$POSTGRES_PASS \
     --set global.postgresql.repmgrDatabase=$POSTGRES_DBNAME \
     --set global.postgresql.repmgrPassword=$POSTGRES_PASS \
-    --set pgpool.resources.requests.cpu="10m" \
-    --set pgpool.resources.requests.memory="20Mi" \
-    --set pgpool.resources.limits.cpu="100m" \
-    --set pgpool.resources.limits.memory="200Mi" \
+    --set pgpool.resources.requests.cpu="40m" \
+    --set pgpool.resources.requests.memory="80Mi" \
+    --set pgpool.resources.limits.cpu="400m" \
+    --set pgpool.resources.limits.memory="800Mi" \
     --set postgresql.resources.requests.cpu="20m" \
     --set postgresql.resources.requests.memory="40Mi" \
     --set postgresql.resources.limits.cpu="200m" \
