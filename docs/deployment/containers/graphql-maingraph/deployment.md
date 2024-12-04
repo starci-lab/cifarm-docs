@@ -5,11 +5,6 @@ description: This section guides you through building the GraphQL Maingraph in y
 ---
 # GraphQL Maingraph Deployment
 ## Introduction
-This section provides a comprehensive guide to deploying the GraphQL Maingraph in your Kubernetes environment. As a central component of the application, the GraphQL Maingraph is responsible for managing and aggregating GraphQL queries to support gameplay-related operations. This guide will take you through the process of adding or updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and deploying the service using Helm charts.
-
-The deployment steps include configuring essential settings, such as database connection details, and installing the service with the appropriate Helm values. After deployment, we will provide instructions on how to access the GraphQL Maingraph service both within the cluster and externally using port forwarding.
-
-By following this guide, you will successfully deploy the GraphQL Maingraph in your Kubernetes environment, integrate it with the PostgreSQL database, and ensure it is fully functional to handle GraphQL operations efficiently.
 
 ## Steps
 ### Add/Update the Helm Repository (Remote)
