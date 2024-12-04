@@ -15,7 +15,6 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 ### Set environments
 ```bash
 export POSTGRES_DBNAME=gameplay
-export POSTGRES_USER=cifarm
 export POSTGRES_PASS=UqW1R2J7UhKv6Aqf
 ```
 ### Excecute scripts
@@ -23,9 +22,9 @@ export POSTGRES_PASS=UqW1R2J7UhKv6Aqf
 ```bash
 helm install gameplay-postgresql bitnami/postgresql-ha \
     --namespace databases \
-    --set global.postgresql.username=$POSTGRES_USER \
     --set global.postgresql.database=$POSTGRES_DBNAME \
     --set global.postgresql.password=$POSTGRES_PASS \
+    --set global.postgresql.repmgrDatabase=$POSTGRES_DBNAME \
     --set global.postgresql.repmgrPassword=$POSTGRES_PASS \
     --set pgpool.resources.requests.cpu="10m" \
     --set pgpool.resources.requests.memory="20Mi" \
