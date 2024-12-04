@@ -7,21 +7,6 @@ description: This section guides you through building the Gameplay Service in yo
 ## Introduction
 
 ## Steps
-###  Add/Update the helm repository (Remote only)
-```bash
-# Check if the 'cifarm' repository is already added
-if helm repo list | grep -q "^cifarm" 
-then
-    # If the 'cifarm' repository is already in the list, print a message and update the repository
-    echo "Repository 'cifarm' is already added. Updating..."
-    helm repo update cifarm
-else
-    # If the 'cifarm' repository is not in the list, add it and update the repository
-    echo "Repository 'cifarm' is not added. Adding now..."
-    helm repo add cifarm https://starci-lab.github.io/cifarm-k8s/charts
-    helm repo update cifarm
-fi
-```
 ### Set environments
 ```bash
 # Redis cache configuration
@@ -59,6 +44,20 @@ GAMEPLAY_SERVICE_PORT=3014
 ### Excute scripts
 #### 1. Install (Remote)
 ```bash
+# Check if the 'cifarm' repository is already added
+if helm repo list | grep -q "^cifarm" 
+then
+    # If the 'cifarm' repository is already in the list, print a message and update the repository
+    echo "Repository 'cifarm' is already added. Updating..."
+    helm repo update cifarm
+else
+    # If the 'cifarm' repository is not in the list, add it and update the repository
+    echo "Repository 'cifarm' is not added. Adding now..."
+    helm repo add cifarm https://starci-lab.github.io/cifarm-k8s/charts
+    helm repo update cifarm
+fi
+
+# Install
 helm install gameplay-service cifarm/deployment \
     --namespace containers \
     --set image.repository="cifarm/gameplay-service" \
@@ -94,7 +93,7 @@ cd cifarm-k8s
 
 # Install
 helm install gameplay-service ./charts/repo/deployment \
-        --namespace containers \
+    --namespace containers \
     --set image.repository="cifarm/gameplay-service" \
     --set image.tag="latest" \
     --set service.port=3014 \
