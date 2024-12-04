@@ -7,21 +7,6 @@ description: This section guides you through building the Gameplay Service in yo
 ## Introduction
 
 ## Steps
-###  Add/Update the helm repository (Remote only)
-```bash
-# Check if the 'cifarm' repository is already added
-if helm repo list | grep -q "^cifarm" 
-then
-    # If the 'cifarm' repository is already in the list, print a message and update the repository
-    echo "Repository 'cifarm' is already added. Updating..."
-    helm repo update cifarm
-else
-    # If the 'cifarm' repository is not in the list, add it and update the repository
-    echo "Repository 'cifarm' is not added. Adding now..."
-    helm repo add cifarm https://starci-lab.github.io/cifarm-k8s/charts
-    helm repo update cifarm
-fi
-```
 ### Set environments
 ```bash
 # Redis cache configuration
@@ -53,15 +38,32 @@ JWT_SECRET="C3ZofmtZ+hXQF2d~&bBu9x'UtkUyz?)MwXiXy_eGFlyO|:v!JW$?iZ&U6:kPQg("
 JWT_ACCESS_TOKEN_EXPIRATION=5m
 JWT_REFRESH_TOKEN_EXPIRATION=7d
 
+GAMEPLAY_SERVICE_PORT=3014
 ```
 
 ### Excute scripts
 #### 1. Install (Remote)
 ```bash
+# Check if the 'cifarm' repository is already added
+if helm repo list | grep -q "^cifarm" 
+then
+    # If the 'cifarm' repository is already in the list, print a message and update the repository
+    echo "Repository 'cifarm' is already added. Updating..."
+    helm repo update cifarm
+else
+    # If the 'cifarm' repository is not in the list, add it and update the repository
+    echo "Repository 'cifarm' is not added. Adding now..."
+    helm repo add cifarm https://starci-lab.github.io/cifarm-k8s/charts
+    helm repo update cifarm
+fi
+
+# Install
 helm install gameplay-service cifarm/deployment \
     --namespace containers \
     --set image.repository="cifarm/gameplay-service" \
     --set image.tag="latest" \
+    --set service.port=3014 \
+    --set service.targetPort=3014 \
     --set env.CACHE_REDIS_HOST=$CACHE_REDIS_HOST \
     --set env.CACHE_REDIS_PORT=$CACHE_REDIS_PORT \
     --set env.GAMEPLAY_POSTGRES_DBNAME=$GAMEPLAY_POSTGRES_DBNAME \
@@ -80,7 +82,8 @@ helm install gameplay-service cifarm/deployment \
     --set env.KAFKA_1_PORT=$KAFKA_1_PORT \
     --set env.JWT_SECRET="$JWT_SECRET" \
     --set env.JWT_ACCESS_TOKEN_EXPIRATION=$JWT_ACCESS_TOKEN_EXPIRATION \
-    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION
+    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION \
+    --set env.GAMEPLAY_SERVICE_PORT=$GAMEPLAY_SERVICE_PORT
 ```
 #### 2. Install (Local)
 ```bash
@@ -93,6 +96,8 @@ helm install gameplay-service ./charts/repo/deployment \
     --namespace containers \
     --set image.repository="cifarm/gameplay-service" \
     --set image.tag="latest" \
+    --set service.port=3014 \
+    --set service.targetPort=3014 \
     --set env.CACHE_REDIS_HOST=$CACHE_REDIS_HOST \
     --set env.CACHE_REDIS_PORT=$CACHE_REDIS_PORT \
     --set env.GAMEPLAY_POSTGRES_DBNAME=$GAMEPLAY_POSTGRES_DBNAME \
@@ -111,11 +116,12 @@ helm install gameplay-service ./charts/repo/deployment \
     --set env.KAFKA_1_PORT=$KAFKA_1_PORT \
     --set env.JWT_SECRET="$JWT_SECRET" \
     --set env.JWT_ACCESS_TOKEN_EXPIRATION=$JWT_ACCESS_TOKEN_EXPIRATION \
-    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION
+    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION \
+    --set env.GAMEPLAY_SERVICE_PORT=$GAMEPLAY_SERVICE_PORT
 ```
 #### 3. Check deployment
 ```bash
-kubectl get deployment gameplay-service-deployment -n containers
+kubectl get deployment gameplay-service -n containers
 ```
 #### 4. Check pods
 ```bash

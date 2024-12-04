@@ -7,22 +7,6 @@ description: This section guides you through building the Rest API Gateway in yo
 ## Introduction
 
 ## Steps
-### Add/Update the Helm Repository (Remote only)
-```bash
-# Check if the 'cifarm' repository is already added
-if helm repo list | grep -q "^cifarm" 
-then
-    # If the 'cifarm' repository is already in the list, print a message and update the repository
-    echo "Repository 'cifarm' is already added. Updating..."
-    helm repo update cifarm
-else
-    # If the 'cifarm' repository is not in the list, add it and update the repository
-    echo "Repository 'cifarm' is not added. Adding now..."
-    helm repo add cifarm https://starci-lab.github.io/cifarm-k8s/charts
-    helm repo update cifarm
-fi
-```
-
 ### Set environments
 ```bash
 
@@ -37,8 +21,21 @@ REST_API_GATEWAY_PORT=3001
 
 ### Excute scripts
 #### 1. Install (Remote)
-
 ```bash
+# Check if the 'cifarm' repository is already added
+if helm repo list | grep -q "^cifarm" 
+then
+    # If the 'cifarm' repository is already in the list, print a message and update the repository
+    echo "Repository 'cifarm' is already added. Updating..."
+    helm repo update cifarm
+else
+    # If the 'cifarm' repository is not in the list, add it and update the repository
+    echo "Repository 'cifarm' is not added. Adding now..."
+    helm repo add cifarm https://starci-lab.github.io/cifarm-k8s/charts
+    helm repo update cifarm
+fi
+
+# Install
 helm install rest-api-gateway cifarm/rest-api-gateway \
     --namespace containers \
     --set image.repository="cifarm/rest-api-gateway" \
@@ -46,7 +43,6 @@ helm install rest-api-gateway cifarm/rest-api-gateway \
     --set env.GAMEPLAY_SERVICE_HOST=$GAMEPLAY_SERVICE_HOST \
     --set env.GAMEPLAY_SERVICE_PORT=$GAMEPLAY_SERVICE_PORT \
     --set env.REST_API_GATEWAY_PORT=$REST_API_GATEWAY_PORT 
-
 ```
 
 #### 2. Install (Local)
