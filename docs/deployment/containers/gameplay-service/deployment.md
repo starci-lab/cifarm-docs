@@ -53,6 +53,7 @@ JWT_SECRET="C3ZofmtZ+hXQF2d~&bBu9x'UtkUyz?)MwXiXy_eGFlyO|:v!JW$?iZ&U6:kPQg("
 JWT_ACCESS_TOKEN_EXPIRATION=5m
 JWT_REFRESH_TOKEN_EXPIRATION=7d
 
+GAMEPLAY_SERVICE_PORT=3014
 ```
 
 ### Excute scripts
@@ -62,6 +63,8 @@ helm install gameplay-service cifarm/deployment \
     --namespace containers \
     --set image.repository="cifarm/gameplay-service" \
     --set image.tag="latest" \
+    --set service.port=3014 \
+    --set service.targetPort=3014 \
     --set env.CACHE_REDIS_HOST=$CACHE_REDIS_HOST \
     --set env.CACHE_REDIS_PORT=$CACHE_REDIS_PORT \
     --set env.GAMEPLAY_POSTGRES_DBNAME=$GAMEPLAY_POSTGRES_DBNAME \
@@ -80,7 +83,8 @@ helm install gameplay-service cifarm/deployment \
     --set env.KAFKA_1_PORT=$KAFKA_1_PORT \
     --set env.JWT_SECRET="$JWT_SECRET" \
     --set env.JWT_ACCESS_TOKEN_EXPIRATION=$JWT_ACCESS_TOKEN_EXPIRATION \
-    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION
+    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION \
+    --set env.GAMEPLAY_SERVICE_PORT=$GAMEPLAY_SERVICE_PORT
 ```
 #### 2. Install (Local)
 ```bash
@@ -90,9 +94,11 @@ cd cifarm-k8s
 
 # Install
 helm install gameplay-service ./charts/repo/deployment \
-    --namespace containers \
+        --namespace containers \
     --set image.repository="cifarm/gameplay-service" \
     --set image.tag="latest" \
+    --set service.port=3014 \
+    --set service.targetPort=3014 \
     --set env.CACHE_REDIS_HOST=$CACHE_REDIS_HOST \
     --set env.CACHE_REDIS_PORT=$CACHE_REDIS_PORT \
     --set env.GAMEPLAY_POSTGRES_DBNAME=$GAMEPLAY_POSTGRES_DBNAME \
@@ -111,7 +117,8 @@ helm install gameplay-service ./charts/repo/deployment \
     --set env.KAFKA_1_PORT=$KAFKA_1_PORT \
     --set env.JWT_SECRET="$JWT_SECRET" \
     --set env.JWT_ACCESS_TOKEN_EXPIRATION=$JWT_ACCESS_TOKEN_EXPIRATION \
-    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION
+    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION \
+    --set env.GAMEPLAY_SERVICE_PORT=$GAMEPLAY_SERVICE_PORT
 ```
 #### 3. Check deployment
 ```bash
