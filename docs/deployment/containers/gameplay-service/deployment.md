@@ -24,11 +24,11 @@ GAMEPLAY_POSTGRES_PASS=UqW1R2J7UhKv6Aqf
 GAMEPLAY_SERVICE_PORT=3014
 
 # Kafka
-HEADLESS_KAFKA_1_HOST=kafka-controller-0.kafka-controller-headless.brokers.svc.cluster.local
+HEADLESS_KAFKA_1_HOST=kafka.brokers.svc.cluster.local
 HEADLESS_KAFKA_1_PORT=9092
-HEADLESS_KAFKA_2_HOST=kafka-controller-1.kafka-controller-headless.brokers.svc.cluster.local 
+HEADLESS_KAFKA_2_HOST=kafka.brokers.svc.cluster.local
 HEADLESS_KAFKA_2_PORT=9092
-HEADLESS_KAFKA_3_HOST=kafka-controller-2.kafka-controller-headless.brokers.svc.cluster.local
+HEADLESS_KAFKA_3_HOST=kafka.brokers.svc.cluster.local
 HEADLESS_KAFKA_3_PORT=9092
 KAFKA_1_HOST=kafka.brokers.svc.cluster.local
 KAFKA_1_PORT=9092

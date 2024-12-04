@@ -35,11 +35,11 @@ helm uninstall adapter-redis --namespace databases
 - **Kind**: Service  
 - **Type**: ClusterIP  
 - **Host**: `adapter-redis-master.databases.svc.cluster.local`  
-- **Port**: 5432
+- **Port**: 6379
 - **Note**: Write & Read
 ### Adapter Redis Replicas
 - **Kind**: Service  
 - **Type**: ClusterIP  
 - **Host**: `adapter-redis-replicas.databases.svc.cluster.local`  
-- **Port**: 5432
+- **Port**: 6379
 - **Note**: Read-only
