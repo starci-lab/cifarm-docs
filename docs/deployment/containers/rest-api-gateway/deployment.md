@@ -36,7 +36,7 @@ else
 fi
 
 # Install
-helm install rest-api-gateway cifarm/rest-api-gateway \
+helm install rest-api-gateway cifarm/deployment \
     --namespace containers \
     --set image.repository="cifarm/rest-api-gateway" \
     --set image.tag="latest" \
