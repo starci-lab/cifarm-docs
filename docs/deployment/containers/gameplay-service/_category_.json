@@ -1,8 +1,8 @@
 {
     "label": "Gameplay Service",
-    "position": 2,       
+    "position": 2,
     "link": {
         "type": "generated-index",
-        "description": "Guides for deploying Gameplay Service into K8S Cluster"
+        "description": "Guides for deploying the Gameplay Service into the K8S Cluster. The Gameplay Service is the main server responsible for handling the core logic of requests, supporting both gRPC and REST API Gateway."
     }
 }

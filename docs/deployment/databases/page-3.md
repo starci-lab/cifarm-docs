@@ -3,7 +3,8 @@ title: "Install Redis"
 sidebar_position: 3
 description: "Install Redis"
 ---
-# Create a YAML Configuration File
+# Install Redis
+### Create a YAML Configuration File
 Create a file named `redis-values.yaml` to define the configuration for your Redis deployment. This file contains settings for the master and replica Redis instances, including resource requests and limits.
 ```bash
 # redis-values.yaml

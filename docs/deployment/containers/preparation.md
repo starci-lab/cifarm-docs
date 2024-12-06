@@ -1,13 +1,11 @@
 ---
-title: "Preparation"
+title: "Setup"
 sidebar_position: 1
-description: "Guide for preparation"
+description: "Setup"
 ---
-# Preparation
-## Introduction
-This guide covers the essential steps to prepare your Kubernetes environment, including creating namespaces to organize and manage resources efficiently. Following these steps ensures a smooth deployment process.
-## Steps
-### 1. Create Namespace
+# Setup
+### Create namespace
+To begin, create the required namespaces in your Kubernetes cluster to organize your resources
 ```bash
 kubectl create namespace build
 kubectl create namespace containers

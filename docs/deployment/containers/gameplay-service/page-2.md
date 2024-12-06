@@ -1,29 +1,27 @@
 ---
 title: "Deployment"
 sidebar_position: 2
-description: This section guides you through building the Gameplay Service in your Kubernetes environment using Helm.
+description: Deployment
 ---
 # Gameplay Service Deployment
-## Introduction
-
-## Steps
+Before deploying, set the following environment variables to ensure the necessary configurations are applied to the Gameplay Service
 ### Set environments
 ```bash
-# Redis cache configuration
+# Redis Cache Configuration
 CACHE_REDIS_HOST=cache-redis-master.databases.svc.cluster.local
 CACHE_REDIS_PORT=6379
 
-# Gameplay Test Postgres configuration
+# Gameplay Test Postgres Configuration
 GAMEPLAY_POSTGRES_DBNAME=gameplay
 GAMEPLAY_POSTGRES_HOST=gameplay-postgresql-postgresql-ha-pgpool.databases.svc.cluster.local
 GAMEPLAY_POSTGRES_PORT=5432
 GAMEPLAY_POSTGRES_USER=postgres
 GAMEPLAY_POSTGRES_PASS=UqW1R2J7UhKv6Aqf
 
-# Gameplay Service
+# Gameplay Service Configuration
 GAMEPLAY_SERVICE_PORT=3014
 
-# Kafka
+# Kafka Configuration
 HEADLESS_KAFKA_1_HOST=kafka-controller-0.kafka-controller-headless.brokers.svc.cluster.local
 HEADLESS_KAFKA_1_PORT=9092
 HEADLESS_KAFKA_2_HOST=kafka-controller-1.kafka-controller-headless.brokers.svc.cluster.local 
@@ -33,16 +31,16 @@ HEADLESS_KAFKA_3_PORT=9092
 KAFKA_1_HOST=kafka.brokers.svc.cluster.local
 KAFKA_1_PORT=9092
 
-# JWT
+# JWT Authentication Configuration
 JWT_SECRET="C3ZofmtZ+hXQF2d~&bBu9x'UtkUyz?)MwXiXy_eGFlyO|:v!JW$?iZ&U6:kPQg("
 JWT_ACCESS_TOKEN_EXPIRATION=5m
 JWT_REFRESH_TOKEN_EXPIRATION=7d
 
+# Repeat the Gameplay Service Port for clarity
 GAMEPLAY_SERVICE_PORT=3014
 ```
-
-### Excute scripts
-#### 1. Install (Remote)
+### Remote Installation
+If the Helm repository is not already added, the script will first add it and then update it. You can check and add the repository with the following
 ```bash
 # Check if the 'cifarm' repository is already added
 if helm repo list | grep -q "^cifarm" 
@@ -56,7 +54,9 @@ else
     helm repo add cifarm https://starci-lab.github.io/cifarm-k8s/charts
     helm repo update cifarm
 fi
-
+```
+Next, deploy the Gameplay Service using Helm with the environment variables configured earlier
+```bash
 # Install
 helm install gameplay-service cifarm/deployment \
     --namespace containers \
@@ -85,13 +85,16 @@ helm install gameplay-service cifarm/deployment \
     --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION \
     --set env.GAMEPLAY_SERVICE_PORT=$GAMEPLAY_SERVICE_PORT
 ```
-#### 2. Install (Local)
+#### 2. Locally Installation
+If you prefer to install locally, clone the repository and proceed with the installation:
 ```bash
 # Clone the repository
 git clone https://github.com/starci-lab/cifarm-k8s.git
 cd cifarm-k8s
-
-# Install
+```
+Then, deploy and install the service
+```bash
+# Install Gameplay Service locally
 helm install gameplay-service ./charts/repo/deployment \
     --namespace containers \
     --set image.repository="cifarm/gameplay-service" \
@@ -119,28 +122,27 @@ helm install gameplay-service ./charts/repo/deployment \
     --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION \
     --set env.GAMEPLAY_SERVICE_PORT=$GAMEPLAY_SERVICE_PORT
 ```
-#### 3. Check deployment
+#### Check Deployment Status
+After deploying, you can verify the status of the deployment
 ```bash
 kubectl get deployment gameplay-service-deployment -n containers
 ```
-#### 4. Check pods
+#### Check pods
+To view the pods, use the following command
 ```bash
-# Get all pods in namespace containers
+# Get all pods in the 'containers' namespace
 kubectl get pods -n containers
-# Describe a single pod
-kubectl describe pods gameplay-service-xxxxxxxx  -n containers
-# Log a single pod
-kubectl logs gameplay-service-xxxxxxxx  -n containers
+
+# Describe a specific pod to get more details
+kubectl describe pods -n containers | grep 'gameplay-service.*'
+
+# View logs of a specific pod
+kubectl get pods -n containers | grep 'gameplay-service.*'
 ```
-#### 5. Uninstall helm
+#### 5. Uninstall Helm Release
+If you need to remove the deployment, you can uninstall the Helm release:
 ```bash
 helm uninstall gameplay-service -n containers
 ```
-
-## Access
-### Gameplay Service
-- **Kind**: Service  
-- **Type**: ClusterIP  
-- **Host**: `gameplay-service-cluster-service.containers.svc.cluster.local`  
-- **Port**: 3014
-
+### Access
+You can access the Gameplay Service via the `ClusterIP` service at `gameplay-service-cluster-service.containers.svc.cluster.local` on port `3014`.
