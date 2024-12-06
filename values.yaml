@@ -1,0 +1,11 @@
+service:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"
+config:
+  config.use-proxy-protocol: "true"
+  config.real-ip-header: "proxy_protocol"
+  config.use-forwarded-headers: "true"
