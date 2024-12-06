@@ -8,7 +8,16 @@ description: This section guides you through building the Gameplay Service in yo
 In this section, we provide a detailed guide to building and deploying the Gameplay Service in your Kubernetes environment. This service is essential for managing gameplay-related functionalities within the application. The guide includes step-by-step instructions for configuring the Helm repository, creating namespaces, setting up environment variables, and deploying the service using Helm charts to ensure a smooth and efficient setup.
 
 ## Steps
-### Add/Update the Helm Repository (Remote)
+### Set environments
+```bash
+export DOCKER_SERVER="https://index.docker.io/v1/"
+export DOCKER_USERNAME="cifarm"
+export DOCKER_PASSWORD="*****"
+export DOCKER_EMAIL="cifarm.starcilab@gmail.com"
+```
+
+### Excute scripts
+#### 1. Install (Remote)
 ```bash
 # Check if the 'cifarm' repository is already added
 if helm repo list | grep -q "^cifarm" 
@@ -22,53 +31,62 @@ else
     helm repo add cifarm https://starci-lab.github.io/cifarm-k8s/charts
     helm repo update cifarm
 fi
-```
-### Create namespace
-```bash
-kubectl create namespace gameplay-service-build
-```
-### Create environments
-```bash
-# Redis cache configuration
-export CACHE_REDIS_HOST=localhost
-export CACHE_REDIS_PORT=6379
 
-# Gameplay Test Postgres configuration
-export GAMEPLAY_TEST_POSTGRES_DBNAME=cifarm_test
-export GAMEPLAY_TEST_POSTGRES_HOST=127.0.0.1
-export GAMEPLAY_TEST_POSTGRES_PORT=5432
-export GAMEPLAY_TEST_POSTGRES_USER=postgres
-export GAMEPLAY_TEST_POSTGRES_PASS=Cuong123_A
+# Install
+helm install gameplay-service-build cifarm/build \
+    --namespace build \
+    --set imageCredentials.registry=$DOCKER_SERVER \
+    --set imageCredentials.username=$DOCKER_USERNAME \
+    --set imageCredentials.password=$DOCKER_PASSWORD \
+    --set imageCredentials.email=$DOCKER_EMAIL \
+    --set image.repository="cifarm/gameplay-service" \
+    --set image.tag="latest" \
+    --set image.dockerfile="./apps/gameplay-service/Dockerfile" \
+    --set image.context="git://github.com/starci-lab/cifarm-containers" \
+    --set resources.requests.cpu="50m" \
+    --set resources.requests.memory="100Mi" \
+    --set resources.limits.cpu="500m" \
+    --set resources.limits.memory="1Gi"
+```
 
-# Gameplay Service
-export GAMEPLAY_SERVICE_HOST=localhost
-export GAMEPLAY_SERVICE_PORT=3014
+#### 2. Install (Local)
+```bash
+# Clone the repository
+git clone https://github.com/starci-lab/cifarm-k8s.git
+cd cifarm-k8s
+
+helm install gameplay-service-build ./charts/repo/build \
+    --namespace build \
+    --set imageCredentials.registry=$DOCKER_SERVER \
+    --set imageCredentials.username=$DOCKER_USERNAME \
+    --set imageCredentials.password=$DOCKER_PASSWORD \
+    --set imageCredentials.email=$DOCKER_EMAIL \
+    --set image.repository="cifarm/gameplay-service" \
+    --set image.tag="latest" \
+    --set image.dockerfile="./apps/gameplay-service/Dockerfile" \
+    --set image.context="git://github.com/starci-lab/cifarm-containers" \
+    --set resources.requests.cpu="50m" \
+    --set resources.requests.memory="100Mi" \
+    --set resources.limits.cpu="500m" \
+    --set resources.limits.memory="1Gi"
+```
+#### 3. Check pods
+```bash
+
+#View build file like -watch
+kubectl logs gameplay-service-build-kaniko -n build -f
+
+# check build is completed
+kubectl get pods -n build
+
+# View secrets
+kubectl get secret gameplay-service-build-secret -n build
+kubectl describe secret gameplay-service-build-secret -n build
 
 ```
-### Create environments
+#### 4. Uninstall pod and helm
 ```bash
-export DOCKER_SERVER="https://index.docker.io/v1/"
-export DOCKER_USERNAME="cifarm"
-export DOCKER_PASSWORD="*****"
-export DOCKER_EMAIL="cifarm.starcilab@gmail.com"
-```
-### Install
-You can install `gameplay-service-build` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
-#### Option 1: Install Using a URL for the values.yaml File
-```bash
-helm install gameplay-service-build cifarm/gameplay-service-build
-    --set namespace gameplay-service-build
-    --set secret.imageCredentials.registry=$DOCKER_SERVER
-    --set secret.imageCredentials.username=$DOCKER_USERNAME
-    --set secret.imageCredentials.password=$DOCKER_PASSWORD
-    --set secret.imageCredentials.email=$DOCKER_EMAIL
-```
-#### Option 2: Install Using a Local Path for the values.yaml File
-```bash
-helm install gameplay-service-build ./charts/repo/containers/gameplay-service/build/
-    --set namespace gameplay-service-build
-    --set secret.imageCredentials.registry=$DOCKER_SERVER
-    --set secret.imageCredentials.username=$DOCKER_USERNAME
-    --set secret.imageCredentials.password=$DOCKER_PASSWORD
-    --set secret.imageCredentials.email=$DOCKER_EMAIL
+kubectl delete pod gameplay-service-build-kaniko -n build
+
+helm uninstall gameplay-service-build -n build
 ```

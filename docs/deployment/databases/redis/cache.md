@@ -16,6 +16,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 ```bash
 helm install cache-redis bitnami/redis \
     --namespace databases \
+    --set auth.enabled=false \
     --set replica.replicaCount=1 \
     --set replica.resources.requests.cpu="10m" \
     --set replica.resources.requests.memory="20Mi" \

@@ -7,7 +7,18 @@ description: This section guides you through building the GraphQL Maingraph in y
 ## Introduction
 
 ## Steps
-### Add/Update the Helm Repository (Remote)
+### Set environments
+```bash
+
+# GraphQL Subgraph
+GRAPHQL_SUBGRAPH_STATIC_URL=http://static-subgraph-service.containers.svc.cluster.local:3007/graphql
+GRAPHQL_API_GATEWAY_PORT=3006
+
+```
+
+
+### Excute scripts
+#### 1. Install (Remote)
 ```bash
 # Check if the 'cifarm' repository is already added
 if helm repo list | grep -q "^cifarm" 
@@ -21,50 +32,57 @@ else
     helm repo add cifarm https://starci-lab.github.io/cifarm-k8s/charts
     helm repo update cifarm
 fi
-```
-### Create namespace
-```bash
-kubectl create namespace graphql-maingraph-deployment
-```
-### Create environments
-```bash
-
-# GraphQL Subgraph
-export GRAPHQL_SUBGRAPH_STATIC_URL=http://host.docker.internal:3007/graphql
-
-```
 
 ### Install
-You can install `graphql-maingraph-build` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
-#### Option 1: Install Using a URL for the values.yaml File
 ```bash
-helm install graphql-maingraph-deployment cifarm/graphql-maingraph-deployment
-    --set namespace graphql-maingraph-deployment
-    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME
-    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST
-    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT
-    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER
-    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS
+helm install graphql-maingraph cifarm/deployment \
+    --namespace containers \
+    --set image.repository="cifarm/graphql-maingraph" \
+    --set image.tag="latest" \
+    --set service.port=$GRAPHQL_API_GATEWAY_PORT \
+    --set service.targetPort=$GRAPHQL_API_GATEWAY_PORT \
+    --set env.GRAPHQL_SUBGRAPH_STATIC_URL=$GRAPHQL_SUBGRAPH_STATIC_URL \
+    --set env.GRAPHQL_API_GATEWAY_PORT=$GRAPHQL_API_GATEWAY_PORT
 
 ```
-#### Option 2: Install Using a Local Path for the values.yaml File
+
+#### 2. Install (Local)
 ```bash
-helm install graphql-maingraph-deployment ./charts/repo/containers/graphql-maingraph/build/
-    --set namespace graphql-maingraph-deployment
-    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME
-    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST
-    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT
-    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER
-    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS
+# Clone the repository
+git clone https://github.com/starci-lab/cifarm-k8s.git
+cd cifarm-k8s
+
+# Install
+helm install graphql-maingraph ./charts/repo/deployment \
+    --namespace containers \
+    --set image.repository="cifarm/graphql-maingraph" \
+    --set image.tag="latest" \
+    --set service.port=$GRAPHQL_API_GATEWAY_PORT \
+    --set service.targetPort=$GRAPHQL_API_GATEWAY_PORT \
+    --set env.GRAPHQL_SUBGRAPH_STATIC_URL=$GRAPHQL_SUBGRAPH_STATIC_URL \
+    --set env.GRAPHQL_API_GATEWAY_PORT=$GRAPHQL_API_GATEWAY_PORT
 ```
+#### 3. Check deployment
+```bash
+kubectl get deployment graphql-maingraph-deployment -n containers
+```
+#### 4. Check pods
+```bash
+# Get all pods in namespace containers
+kubectl get pods -n containers
+# Describe a single pod
+kubectl describe pods graphql-maingraph-xxxxxxxx  -n containers
+# Log a single pod
+kubectl logs graphql-maingraph-xxxxxxxx  -n containers
+```
+#### 5. Uninstall helm
+```bash
+helm uninstall graphql-maingraph -n containers
+```
+
 ## Access
 ### GraphQL Maingraph
 - **Kind**: Service  
 - **Type**: ClusterIP  
-- **Host**: `graphql-maingraph-cluster-ip.graphql-maingraph-deployment.svc.cluster.local`  
-- **Port**: 3014
-To forward the port for local access, use the following command
-```bash
-# Forward port for Gameplay PostgreSQL
-kubectl port-forward svc/graphql-maingraph-cluster-ip --namespace graphql-maingraph-deployment 3014:3014
-```
+- **Host**: `graphql-maingraph-cluster-service.containers.svc.cluster.local`  
+- **Port**: 3006
