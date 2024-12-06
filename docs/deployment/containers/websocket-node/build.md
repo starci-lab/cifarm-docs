@@ -6,8 +6,18 @@ description: This section guides you through building the Websocket Node in your
 # Websocket Node Build
 ## Introduction
 In this section, we provide a comprehensive guide to building and deploying the Websocket Node in your Kubernetes environment. This service is a critical component responsible for managing real-time communication and websocket connections within the application. The guide includes detailed instructions for setting up the Helm repository, configuring namespaces, defining environment variables, and deploying the service using Helm charts to ensure a seamless and efficient deployment process.
+
 ## Steps
-### Add/Update the Helm Repository (Remote)
+### Set environments
+```bash
+export DOCKER_SERVER="https://index.docker.io/v1/"
+export DOCKER_USERNAME="cifarm"
+export DOCKER_PASSWORD="*****"
+export DOCKER_EMAIL="cifarm.starcilab@gmail.com"
+```
+
+### Excute scripts
+#### 1. Install (Remote)
 ```bash
 # Check if the 'cifarm' repository is already added
 if helm repo list | grep -q "^cifarm" 
@@ -21,53 +31,62 @@ else
     helm repo add cifarm https://starci-lab.github.io/cifarm-k8s/charts
     helm repo update cifarm
 fi
-```
-### Create namespace
-```bash
-kubectl create namespace websocket-node-build
-```
-### Create environments
-```bash
-# Redis cache configuration
-export CACHE_REDIS_HOST=localhost
-export CACHE_REDIS_PORT=6379
 
-# Gameplay Test Postgres configuration
-export GAMEPLAY_TEST_POSTGRES_DBNAME=cifarm_test
-export GAMEPLAY_TEST_POSTGRES_HOST=127.0.0.1
-export GAMEPLAY_TEST_POSTGRES_PORT=5432
-export GAMEPLAY_TEST_POSTGRES_USER=postgres
-export GAMEPLAY_TEST_POSTGRES_PASS=Cuong123_A
-
-# Websocket Node
-export GAMEPLAY_SERVICE_HOST=localhost
-export GAMEPLAY_SERVICE_PORT=3014
-
-```
-### Create environments
-```bash
-export DOCKER_SERVER="https://index.docker.io/v1/"
-export DOCKER_USERNAME="cifarm"
-export DOCKER_PASSWORD="*****"
-export DOCKER_EMAIL="cifarm.starcilab@gmail.com"
-```
 ### Install
-You can install `websocket-node-build` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
-#### Option 1: Install Using a URL for the values.yaml File
-```bash
-helm install websocket-node-build cifarm/websocket-node-build
-    --set namespace websocket-node-build
-    --set secret.imageCredentials.registry=$DOCKER_SERVER
-    --set secret.imageCredentials.username=$DOCKER_USERNAME
-    --set secret.imageCredentials.password=$DOCKER_PASSWORD
-    --set secret.imageCredentials.email=$DOCKER_EMAIL
+helm install websocket-node-build cifarm/build \
+    --namespace build \
+    --set imageCredentials.registry=$DOCKER_SERVER \
+    --set imageCredentials.username=$DOCKER_USERNAME \
+    --set imageCredentials.password=$DOCKER_PASSWORD \
+    --set imageCredentials.email=$DOCKER_EMAIL \
+    --set image.repository="cifarm/websocket-node" \
+    --set image.tag="latest" \
+    --set image.dockerfile="./apps/websocket-node/Dockerfile" \
+    --set image.context="git://github.com/starci-lab/cifarm-containers" \
+    --set resources.requests.cpu="50m" \
+    --set resources.requests.memory="100Mi" \
+    --set resources.limits.cpu="500m" \
+    --set resources.limits.memory="1Gi"
 ```
-#### Option 2: Install Using a Local Path for the values.yaml File
+#### 2. Install (Local)
 ```bash
-helm install websocket-node-build ./charts/repo/containers/websocket-node/build/
-    --set namespace websocket-node-build
-    --set secret.imageCredentials.registry=$DOCKER_SERVER
-    --set secret.imageCredentials.username=$DOCKER_USERNAME
-    --set secret.imageCredentials.password=$DOCKER_PASSWORD
-    --set secret.imageCredentials.email=$DOCKER_EMAIL
+# Clone the repository
+git clone https://github.com/starci-lab/cifarm-k8s.git
+cd cifarm-k8s
+
+#Install
+helm install websocket-node-build ./charts/repo/build \
+    --namespace build \
+    --set imageCredentials.registry=$DOCKER_SERVER \
+    --set imageCredentials.username=$DOCKER_USERNAME \
+    --set imageCredentials.password=$DOCKER_PASSWORD \
+    --set imageCredentials.email=$DOCKER_EMAIL \
+    --set image.repository="cifarm/websocket-node" \
+    --set image.tag="latest" \
+    --set image.dockerfile="./apps/websocket-node/Dockerfile" \
+    --set image.context="git://github.com/starci-lab/cifarm-containers" \
+    --set resources.requests.cpu="50m" \
+    --set resources.requests.memory="100Mi" \
+    --set resources.limits.cpu="500m" \
+    --set resources.limits.memory="1Gi"
+```
+#### 3. Check pods
+```bash
+
+#View build file like -watch
+kubectl logs websocket-node-build-kaniko -n build -f
+
+# check build is completed
+kubectl get pods -n build
+
+# View secrets
+kubectl get secret websocket-node-build-secret -n build
+kubectl describe secret websocket-node-build-secret -n build
+
+```
+#### 4. Uninstall pod and helm
+```bash
+kubectl delete pod websocket-node-build-kaniko -n build
+
+helm uninstall websocket-node-build -n build
 ```

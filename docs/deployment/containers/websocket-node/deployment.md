@@ -5,13 +5,48 @@ description: This section guides you through building the Websocket Node in your
 ---
 # Websocket Node Deployment
 ## Introduction
-In this section, we will walk through the steps necessary to deploy the Websocket Node in your Kubernetes environment. The Websocket Node is a key component of the application, responsible for handling gameplay-related operations. We will guide you through adding and updating the Helm repository, creating a dedicated namespace for deployment, configuring environment variables, and finally, deploying the service using Helm.
 
-The deployment process includes setting up necessary configurations, such as database connection details, and then installing the service using Helm charts. Once the service is deployed, we will also provide instructions for accessing the service both within the cluster and externally via port forwarding.
-
-By following these steps, you'll be able to set up and deploy the Websocket Node within your Kubernetes environment and configure it to work with the PostgreSQL database.
 ## Steps
-### Add/Update the Helm Repository (Remote)
+### Set environments
+```bash
+
+# Adapter Redis
+ADAPTER_REDIS_HOST=adapter-redis-master.databases.svc.cluster.local
+ADAPTER_REDIS_PORT=6379
+
+# Redis cache configuration
+CACHE_REDIS_HOST=cache-redis-master.databases.svc.cluster.local
+CACHE_REDIS_PORT=6379
+
+# Gameplay Postgres configuration
+GAMEPLAY_POSTGRES_DBNAME=gameplay
+GAMEPLAY_POSTGRES_HOST=gameplay-postgresql-postgresql-ha-pgpool.databases.svc.cluster.local
+GAMEPLAY_POSTGRES_PORT=5432
+GAMEPLAY_POSTGRES_USER=postgres
+GAMEPLAY_POSTGRES_PASS=UqW1R2J7UhKv6Aqf
+
+# Websocket Node Service
+WEBSOCKET_API_GATEWAY_PORT=3003
+
+# Kafka
+HEADLESS_KAFKA_1_HOST=kafka-controller-0.kafka-controller-headless.brokers.svc.cluster.local
+HEADLESS_KAFKA_1_PORT=9092
+HEADLESS_KAFKA_2_HOST=kafka-controller-1.kafka-controller-headless.brokers.svc.cluster.local 
+HEADLESS_KAFKA_2_PORT=9092
+HEADLESS_KAFKA_3_HOST=kafka-controller-2.kafka-controller-headless.brokers.svc.cluster.local
+HEADLESS_KAFKA_3_PORT=9092
+KAFKA_1_HOST=kafka.brokers.svc.cluster.local
+KAFKA_1_PORT=9092
+
+# JWT
+JWT_SECRET="C3ZofmtZ+hXQF2d~&bBu9x'UtkUyz?)MwXiXy_eGFlyO|:v!JW$?iZ&U6:kPQg("
+JWT_ACCESS_TOKEN_EXPIRATION=5m
+JWT_REFRESH_TOKEN_EXPIRATION=7d
+
+```
+
+### Excute scripts
+#### 1. Install (Remote)
 ```bash
 # Check if the 'cifarm' repository is already added
 if helm repo list | grep -q "^cifarm" 
@@ -25,94 +60,85 @@ else
     helm repo add cifarm https://starci-lab.github.io/cifarm-k8s/charts
     helm repo update cifarm
 fi
-```
-### Create namespace
-```bash
-kubectl create namespace containers
-```
-### Create environments
-```bash
-
-# Adapter Redis
-ADAPTER_REDIS_HOST=adapter-redis-master.databases.svc.cluster.local
-ADAPTER_REDIS_PORT=6379
-
-# Redis cache configuration
-CACHE_REDIS_HOST=cache-redis-master.databases.svc.cluster.local
-CACHE_REDIS_PORT=6379
-
-# Gameplay Postgres configuration
-GAMEPLAY_POSTGRES_DBNAME=cifarm
-GAMEPLAY_POSTGRES_HOST=gameplay-postgresql-postgresql-ha-pgpool.database.svc.cluster.local
-GAMEPLAY_POSTGRES_PORT=5432
-GAMEPLAY_POSTGRES_USER=postgres
-GAMEPLAY_POSTGRES_PASS=******
-
-# Websocket Node Service
-WEBSOCKET_API_GATEWAY_PORT=3003
-
-```
 
 ### Install
-You can install `websocket-node` using either a remote `values.yaml` file via a URL or a local copy of the configuration file. Choose the method that best suits your setup.
-#### Option 1: Install Using a URL for the values.yaml File
-```bash
-helm install websocket-node cifarm/websocket-node \
+helm install websocket-node cifarm/deployment \
     --namespace containers \
-    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME \
-    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST \
-    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT \
-    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER \
-    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS \
-    --set secret.env.redis.cache.host=$CACHE_REDIS_HOST \
-    --set secret.env.redis.cache.port=$CACHE_REDIS_PORT \
-    --set secret.env.redis.adapter.host=$ADAPTER_REDIS_HOST \
-    --set secret.env.redis.adapter.port=$ADAPTER_REDIS_PORT \
-    --set secret.env.containers.websocketApiGateway.port=$WEBSOCKET_API_GATEWAY_PORT \
-    --set deployment.resources.requests.cpu="10m" \
-    --set deployment.resources.requests.memory="20Mi" \
-    --set deployment.resources.limits.cpu="100m" \
-    --set deployment.resources.limits.memory="200Mi"
+    --set image.repository="cifarm/websocket-node" \
+    --set image.tag="latest" \
+    --set service.port=$WEBSOCKET_API_GATEWAY_PORT \
+    --set service.targetPort=$WEBSOCKET_API_GATEWAY_PORT \
+    --set secret.env.GAMEPLAY_POSTGRES_DBNAME=$GAMEPLAY_POSTGRES_DBNAME \
+    --set secret.env.GAMEPLAY_POSTGRES_HOST=$GAMEPLAY_POSTGRES_HOST \
+    --set secret.env.GAMEPLAY_POSTGRES_PORT=$GAMEPLAY_POSTGRES_PORT \
+    --set secret.env.GAMEPLAY_POSTGRES_USER=$GAMEPLAY_POSTGRES_USER \
+    --set secret.env.GAMEPLAY_POSTGRES_PASS=$GAMEPLAY_POSTGRES_PASS \
+    --set env.HEADLESS_KAFKA_1_HOST=$HEADLESS_KAFKA_1_HOST \
+    --set env.HEADLESS_KAFKA_1_PORT=$HEADLESS_KAFKA_1_PORT \
+    --set env.HEADLESS_KAFKA_2_HOST=$HEADLESS_KAFKA_2_HOST \
+    --set env.HEADLESS_KAFKA_2_PORT=$HEADLESS_KAFKA_2_PORT \
+    --set env.HEADLESS_KAFKA_3_HOST=$HEADLESS_KAFKA_3_HOST \
+    --set env.HEADLESS_KAFKA_3_PORT=$HEADLESS_KAFKA_3_PORT \
+    --set env.KAFKA_1_HOST=$KAFKA_1_HOST \
+    --set env.KAFKA_1_PORT=$KAFKA_1_PORT \
+    --set env.CACHE_REDIS_HOST=$CACHE_REDIS_HOST \
+    --set env.CACHE_REDIS_PORT=$CACHE_REDIS_PORT \
+    --set env.ADAPTER_REDIS_HOST=$ADAPTER_REDIS_HOST \
+    --set env.ADAPTER_REDIS_PORT=$ADAPTER_REDIS_PORT \
+    --set env.JWT_SECRET="$JWT_SECRET" \
+    --set env.JWT_ACCESS_TOKEN_EXPIRATION=$JWT_ACCESS_TOKEN_EXPIRATION \
+    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION
+```
+
+#### 2. Install (Local)
+```bash
+# Clone the repository
+git clone https://github.com/starci-lab/cifarm-k8s.git
+cd cifarm-k8s
+
+# Install
+helm install websocket-node ./charts/repo/deployment \
+    --namespace containers \
+    --set image.repository="cifarm/websocket-node" \
+    --set image.tag="latest" \
+    --set service.port=$WEBSOCKET_API_GATEWAY_PORT \
+    --set service.targetPort=$WEBSOCKET_API_GATEWAY_PORT \
+    --set secret.env.GAMEPLAY_POSTGRES_DBNAME=$GAMEPLAY_POSTGRES_DBNAME \
+    --set secret.env.GAMEPLAY_POSTGRES_HOST=$GAMEPLAY_POSTGRES_HOST \
+    --set secret.env.GAMEPLAY_POSTGRES_PORT=$GAMEPLAY_POSTGRES_PORT \
+    --set secret.env.GAMEPLAY_POSTGRES_USER=$GAMEPLAY_POSTGRES_USER \
+    --set secret.env.GAMEPLAY_POSTGRES_PASS=$GAMEPLAY_POSTGRES_PASS \
+    --set env.HEADLESS_KAFKA_1_HOST=$HEADLESS_KAFKA_1_HOST \
+    --set env.HEADLESS_KAFKA_1_PORT=$HEADLESS_KAFKA_1_PORT \
+    --set env.HEADLESS_KAFKA_2_HOST=$HEADLESS_KAFKA_2_HOST \
+    --set env.HEADLESS_KAFKA_2_PORT=$HEADLESS_KAFKA_2_PORT \
+    --set env.HEADLESS_KAFKA_3_HOST=$HEADLESS_KAFKA_3_HOST \
+    --set env.HEADLESS_KAFKA_3_PORT=$HEADLESS_KAFKA_3_PORT \
+    --set env.KAFKA_1_HOST=$KAFKA_1_HOST \
+    --set env.KAFKA_1_PORT=$KAFKA_1_PORT \
+    --set env.CACHE_REDIS_HOST=$CACHE_REDIS_HOST \
+    --set env.CACHE_REDIS_PORT=$CACHE_REDIS_PORT \
+    --set env.ADAPTER_REDIS_HOST=$ADAPTER_REDIS_HOST \
+    --set env.ADAPTER_REDIS_PORT=$ADAPTER_REDIS_PORT \
+    --set env.JWT_SECRET="$JWT_SECRET" \
+    --set env.JWT_ACCESS_TOKEN_EXPIRATION=$JWT_ACCESS_TOKEN_EXPIRATION \
+    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION
 
 ```
-#### Option 2: Install Using a Local Path for the values.yaml File
+#### 3. Check deployment
 ```bash
-helm install websocket-node ./charts/repo/containers/websocket-node/deployment/ \
-    --namespace containers \
-    --set secret.env.gameplayPostgres.dbName=$GAMEPLAY_POSTGRES_DBNAME \
-    --set secret.env.gameplayPostgres.host=$GAMEPLAY_POSTGRES_HOST \
-    --set secret.env.gameplayPostgres.port=$GAMEPLAY_POSTGRES_PORT \
-    --set secret.env.gameplayPostgres.user=$GAMEPLAY_POSTGRES_USER \
-    --set secret.env.gameplayPostgres.pass=$GAMEPLAY_POSTGRES_PASS \
-    --set secret.env.redis.cache.host=$CACHE_REDIS_HOST \
-    --set secret.env.redis.cache.port=$CACHE_REDIS_PORT \
-    --set secret.env.redis.adapter.host=$ADAPTER_REDIS_HOST \
-    --set secret.env.redis.adapter.port=$ADAPTER_REDIS_PORT \
-    --set secret.env.containers.websocketApiGateway.port=$WEBSOCKET_API_GATEWAY_PORT \
-    --set deployment.resources.requests.cpu="10m" \
-    --set deployment.resources.requests.memory="20Mi" \
-    --set deployment.resources.limits.cpu="100m" \
-    --set deployment.resources.limits.memory="200Mi"
-
+kubectl get deployment websocket-node-deployment -n containers
 ```
-### Check Deployment
+#### 4. Check pods
 ```bash
-kubectl get deployment websocket-node -n containers
-```
-### Check Pod
-#### Get
-```bash
+# Get all pods in namespace containers
 kubectl get pods -n containers
-```
-#### Describe
-```bash
+# Describe a single pod
 kubectl describe pods websocket-node-xxxxxxxx  -n containers
-```
-#### Logs
-```bash
+# Log a single pod
 kubectl logs websocket-node-xxxxxxxx  -n containers
 ```
-### Uninstall
+#### 5. Uninstall helm
 ```bash
 helm uninstall websocket-node -n containers
 ```
@@ -123,8 +149,3 @@ helm uninstall websocket-node -n containers
 - **Type**: ClusterIP  
 - **Host**: `websocket-node-cluster-ip.containers.svc.cluster.local`  
 - **Port**: 3003
-To forward the port for local access, use the following command
-```bash
-# Forward port for Gameplay PostgreSQL
-kubectl port-forward svc/websocket-node-cluster-ip --namespace containers 3003:3003
-```
