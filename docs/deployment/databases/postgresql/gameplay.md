@@ -39,6 +39,7 @@ helm install gameplay-postgresql bitnami/postgresql-ha \
     --set witness.resources.limits.cpu="100m" \
     --set witness.resources.limits.memory="200Mi"
 ```
+You can access the file from this [link](https://starci-lab.github.io/cifarm-k8s/values/gameplay-postgresql-values.yaml).
 #### 2. Uninstall
 ```bash
 helm uninstall gameplay-postgresql --namespace databases
