@@ -1,8 +1,0 @@
-{
-    "label": "PostgreSQL",
-    "position": 2,       
-    "link": {
-        "type": "generated-index",
-        "description": "Guides for deploying CiFarm PostgreSQL Databases into K8S Cluster"
-    }
-}

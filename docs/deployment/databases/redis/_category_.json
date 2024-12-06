@@ -1,8 +1,0 @@
-{
-    "label": "Redis",
-    "position": 3,       
-    "link": {
-        "type": "generated-index",
-        "description": "Guides for deploying CiFarm Redis Databases into K8S Cluster"
-    }
-}
