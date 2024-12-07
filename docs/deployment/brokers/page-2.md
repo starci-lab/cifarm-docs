@@ -4,13 +4,10 @@ sidebar_position: 2
 description: "Install Kafka"
 ---
 # Install Kafka
-## Create Kafka values file
+### Create Kafka values file
 Create a YAML file `kafka-values.yaml` to configure your Kafka instance. This file defines the configuration settings for Kafka listeners, resource allocations, and other related settings.
 ```bash
 # kafka-values.yaml
-
-# Namespace for the Kafka deployment
-namespace: brokers
 
 # Kafka listeners configuration
 listeners:
@@ -35,7 +32,7 @@ Once the values file is created, use the following Helm command to install Kafka
 ```bash
 helm install kafka bitnami/kafka \
     --namespace brokers \
-    --values kafka-values.yaml
+    --values https://starci-lab.github.io/cifarm-k8s/values/kafka-values.yaml
 ```
 ### Using Kafka Services
 The Kafka Headless service is a `ClusterIP` service that allows producers to send messages to one of the Kafka controllers. It exposes the following hostnames for each controller: `kafka-controller-0.kafka-controller-headless.brokers.svc.cluster.local`, `kafka-controller-1.kafka-controller-headless.brokers.svc.cluster.local`, and `kafka-controller-2.kafka-controller-headless.brokers.svc.cluster.local`, all reachable on port 9092.
