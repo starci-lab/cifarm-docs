@@ -9,7 +9,7 @@ description: Deployment
 Before deploying, set the following environment variables to ensure the necessary configurations are applied to the Gameplay Service
 ```bash
 # Rest API Gateway configuration
-GAMEPLAY_SERVICE_HOST=rest-api-gateway-cluster-service.containers.svc.cluster.local
+GAMEPLAY_SERVICE_HOST=gameplay-service-cluster-service.containers.svc.cluster.local
 GAMEPLAY_SERVICE_PORT=3014
 
 # Rest Api Gateway configuration
