@@ -8,7 +8,7 @@ description: "Direct Domain Traffic to Network Load Balancer"
 Define the domain you wish to map to the NLB
 ```bash
 # Set domain
-export DOMAIN_NAME=eks.starci.net
+export DOMAIN_NAME=cifarm.starci.net
 ```
 ### Create a Hosted Zone in Route 53
 Use the AWS CLI to create a hosted zone for your domain in Route 53
@@ -27,13 +27,13 @@ These NS records should be set with your domain registrar or DNS provider (e.g.,
 
 Run an nslookup to ensure the domain is resolving correctly to the NLB’s IP address:
 ```bash
-nslookup eks.starci.net
+nslookup cifarm.starci.net
 
 # Server:         10.255.255.254
 # Address:        10.255.255.254#53
 
 # Non-authoritative answer:
-# Name:   eks.starci.net
+# Name:   cifarm.starci.net
 # Address: 52.76.162.112
 ```
 If you see the NLB's IP address in the result, this confirms that the domain is correctly mapped to the NLB.

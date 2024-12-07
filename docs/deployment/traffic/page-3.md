@@ -47,7 +47,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"           # Redirect HTTP to HTTPS
 spec:
   rules:
-  - host: eks.starci.net  # Replace with your domain name
+  - host: cifarm.starci.net  # Replace with your domain name
     http:
       paths:
       - path: /
@@ -59,7 +59,7 @@ spec:
               number: 80
   tls:
   - hosts:
-    - eks.starci.net  # The domain name for the certificate
+    - cifarm.starci.net  # The domain name for the certificate
     secretName: letsencrypt-production-tls  # Secret where the TLS certificate will be stored
 ```
 You can access the file from this [link](https://starci-lab.github.io/cifarm-k8s/resources/example-ingress.yaml).
@@ -93,4 +93,4 @@ Status:
 ```
 Once the certificate is issued and ready, your application will be accessible via HTTPS
 ### References
-- [Amazon EKS Quickstart Guide](https://docs.aws.amazon.com/eks/latest/userguide/quickstart.html)
+- [Amazon cifarm Quickstart Guide](https://docs.aws.amazon.com/cifarm/latest/userguide/quickstart.html)
