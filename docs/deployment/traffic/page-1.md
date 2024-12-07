@@ -43,6 +43,7 @@ service:
     service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
     service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"
+    service.beta.kubernetes.io/aws-load-balancer-target-group-attributes: preserve_client_ip.enabled=true, proxy_protocol_v2.enabled=true
 
 # NGINX configuration to handle real IP headers and proxy protocol
 config:
