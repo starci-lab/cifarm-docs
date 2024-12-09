@@ -36,8 +36,6 @@ JWT_SECRET="C3ZofmtZ+hXQF2d~&bBu9x'UtkUyz?)MwXiXy_eGFlyO|:v!JW$?iZ&U6:kPQg("
 JWT_ACCESS_TOKEN_EXPIRATION=5m
 JWT_REFRESH_TOKEN_EXPIRATION=7d
 
-# Repeat the Gameplay Service Port for clarity
-GAMEPLAY_SERVICE_PORT=3014
 ```
 ### Remote Installation
 If the Helm repository is not already added, the script will first add it and then update it. You can check and add the repository with the following
@@ -82,8 +80,7 @@ helm install gameplay-service cifarm/deployment \
     --set env.KAFKA_1_PORT=$KAFKA_1_PORT \
     --set env.JWT_SECRET="$JWT_SECRET" \
     --set env.JWT_ACCESS_TOKEN_EXPIRATION=$JWT_ACCESS_TOKEN_EXPIRATION \
-    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION \
-    --set env.GAMEPLAY_SERVICE_PORT=$GAMEPLAY_SERVICE_PORT
+    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION
 ```
 #### 2. Locally Installation
 If you prefer to install locally, clone the repository and proceed with the installation:
@@ -119,8 +116,7 @@ helm install gameplay-service ./charts/repo/deployment \
     --set env.KAFKA_1_PORT=$KAFKA_1_PORT \
     --set env.JWT_SECRET="$JWT_SECRET" \
     --set env.JWT_ACCESS_TOKEN_EXPIRATION=$JWT_ACCESS_TOKEN_EXPIRATION \
-    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION \
-    --set env.GAMEPLAY_SERVICE_PORT=$GAMEPLAY_SERVICE_PORT
+    --set env.JWT_REFRESH_TOKEN_EXPIRATION=$JWT_REFRESH_TOKEN_EXPIRATION
 ```
 #### Check Deployment Status
 After deploying, you can verify the status of the deployment
