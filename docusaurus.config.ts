@@ -71,6 +71,12 @@ const config: Config = {
                 src: "img/logo.png"
             },
             items: [
+                {
+                    type: "docSidebar",
+                    sidebarId: "gameplaySidebar",
+                    position: "left",
+                    label: "Gameplay"
+                },
                 { 
                     type: "docSidebar",
                     sidebarId: "deploymentSidebar",
