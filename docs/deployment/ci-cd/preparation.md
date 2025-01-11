@@ -7,8 +7,8 @@ description: "Guide for preparation"
 # Preparation
 
 ## Introduction
-This guide helps you prepare your Kubernetes environment by creating the `automation` namespace for organizing your automation resources.
+This guide helps you prepare your Kubernetes environment by creating the `ci-cd` namespace for organizing your ci-cd resources.
 ## Steps
 ### 1. Create Namespace
 ```bash
-kubectl create namespace automation
+kubectl create namespace ci-cd

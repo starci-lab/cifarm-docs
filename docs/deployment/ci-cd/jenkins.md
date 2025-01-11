@@ -5,7 +5,7 @@ description: "Guide for installing Jenkins"
 ---
 # Jenkins
 ## Introduction
-This guide outlines the steps for installing **Jenkins** on your Kubernetes cluster using the official Helm chart. Jenkins is a popular open-source automation server used for building, testing, and deploying software.
+This guide outlines the steps for installing **Jenkins** on your Kubernetes cluster using the official Helm chart. Jenkins is a popular open-source ci-cd server used for building, testing, and deploying software.
 
 ---
 
@@ -25,33 +25,33 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 ```bash
 # Set the new Grafana admin credentials
 export ADMIN_USER=cifarm
-export ADMIN_PASSWORD=WfcEm30BoFg92XCq
+export ADMIN_PASSWORD=admin@123456
 ```
 ### Execute scripts
 #### 1. Install
 ```bash
 helm install jenkins bitnami/jenkins \
-    --namespace automation \
+    --namespace ci-cd \
     --set jenkinsUser=$ADMIN_USER \
     --set jenkinsPassword=$ADMIN_PASSWORD \
     --set persistence.enabled=true \
     --set persistence.size=10Gi \
-    --set controller.resources.requests.cpu="30m" \
-    --set controller.resources.requests.memory="60Mi" \
-    --set controller.resources.limits.cpu="300m" \
-    --set controller.resources.limits.memory="600Mi" \
+    --set resources.requests.cpu="30m" \
+    --set resources.requests.memory="60Mi" \
+    --set resources.limits.cpu="300m" \
+    --set resources.limits.memory="600Mi" \
     --set service.type=ClusterIP
 
 ```
 #### 2. Uninstall
 ```bash
-helm uninstall jenkins -n automation
+helm uninstall jenkins -n ci-cd
 ```
 ## Access
 ### Jenkins
 - **Kind**: Service  
 - **Type**: ClusterIP
 - **Broker**: 
-    - `jenkins.automation.svc.cluster.local`
+    - `jenkins.ci-cd.svc.cluster.local`
 - **Port**: 9092    
 - **Note**: Producer & Consumer
