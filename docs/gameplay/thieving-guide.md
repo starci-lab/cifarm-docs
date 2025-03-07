@@ -55,6 +55,9 @@ Two furry friends bring **extra flavor** to **Thieving Mode**, each with a **gam
 
 Snag them from the **CiFarm Store** and **unleash their powers!**
 
+![CiFarm](/img/pets/cat.png)
+![CiFarm](/img/pets/dog.png)
+
 ### **Cats 🐱: Masters of Mischief**  
 - **Perk**: **Boosts your thieving success rate**.  
 - **Vibe**: Picture a **sleek tabby slinking through the shadows**, upping your odds with every purr.  

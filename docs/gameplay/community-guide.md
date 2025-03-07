@@ -6,13 +6,13 @@ sidebar_position: 6
 
 In **CiFarm**, going solo gets you started, but the **community** is where the **real magic happens!**  
 
-This isn’t just a game—it’s a **social showdown**, and your network of **fellow CiFarmers** is the **key to unlocking bigger wins**.  
+This isn’t just a **game**—it’s a **social showdown**, and your network of **fellow CiFarmers** is the **key to unlocking bigger wins**.  
 
 The **Thieve Mode** thrives on this vibe, turning **friendships and rivalries** into a **strategic goldmine**.  
 
 Whether you’re a **low-level helper** or a **high-level bandit**, the **more you connect, the more you conquer**.  
 
-Let’s dive into how **community ties** make **CiFarm** a **living, breathing world!**
+Let’s dive into how **community ties** make **CiFarm** a **living, breathing world!**  
 
 ---
 
