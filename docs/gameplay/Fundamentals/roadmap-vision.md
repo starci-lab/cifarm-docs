@@ -6,132 +6,118 @@ slug: /fundamentals/roadmap-vision
 sidebar_position: 2
 ---
 
-# Roadmap & Vision
+# 🎯 Roadmap & Vision
 
-Explore CiFarm's journey and future plans for creating the ultimate P2P farming experience.
+Explore CiFarm's journey and future plans for creating the ultimate farming experience that bridges Web2 and Web3 gaming.
 
-## Current Phase
+## 📅 Current Phase
 
-### Phase 1: Foundation
-- Core game mechanics
-- Basic farming features
-- Initial social features
-- Basic economy
+### 🌱 Phase 1 - Q4 2024 (Completed) ✅
+- 🎮 CiFarm demo announcement
+- 🌾 Core farming features:
+  - 🌿 Planting and harvesting crops
+  - 🐔 Feeding and raising animals
+  - 💰 Purchasing and selling animals and crops
+- 🤝 Social engagement features
 
-### Phase 2: Expansion
-- Advanced farming mechanics
-- Enhanced social features
-- Improved economy
-- Community features
+### 🚀 Phase 2 - Q1 2025 (Completed) ✅
+- 🎮 CiFarm Alpha launch
+- 👥 2,000 early users milestone
+- 🎯 Enhanced gameplay features
+- 🌟 Community building
 
-## Short-term Goals
+## 🔜 Upcoming Phases
 
-### Q1 2024
-- Launch core features
-- Build community
-- Establish economy
-- Basic social features
+### ⏳ Phase 3 - Q2 2025 (In Progress) 🚧
+- 🎮 CiFarm Beta launch
+- 🎨 NFT integration
+- 🌱 First season launch
+- 💎 Seed funding round
+- 🎯 New game mechanics
 
-### Q2 2024
-- Advanced farming
-- Enhanced trading
-- Social improvements
-- Community events
+### 📈 Phase 4 - Q3 2025 (Upcoming) 📅
+- 💰 Token Generation Event (TGE)
+- 💱 DEX and CEX listings
+- 🎮 Additional game mechanics
+- 🎨 New game content
+- ⚡ Enhanced features
 
-## Medium-term Goals
+## 🔧 Technical Development
 
-### Q3 2024
-- New regions
-- Special events
-- Advanced mechanics
-- Community features
+### 🏗️ Infrastructure
+- ⛓️ Multi-chain integration
+- 🔒 Cross-chain security
+- ⚡ Performance optimization
+- 🌐 Web2/Web3 integration
+- 💎 Vault system improvements
 
-### Q4 2024
-- Cross-platform support
-- Advanced economy
-- Enhanced security
-- Community governance
+### 🎮 Features
+- 🍎 New NFT fruits
+- 💎 Enhanced vault system
+- 💱 Advanced trading
+- 👥 Community tools
+- ⛓️ Cross-chain operations
 
-## Long-term Vision
+## 🌟 Community Growth
 
-### 2025 Goals
-- Global expansion
-- Advanced features
-- Enhanced security
-- Community growth
+### 🤝 Engagement
+- 🎉 Community events
+- 💬 Social features
+- 🏛️ Governance tools
+- 🎁 Reward systems
+- 🌐 Web2/Web3 integration
 
-### Future Plans
-- New game modes
-- Advanced mechanics
-- Global events
-- Community features
+### 📈 Development
+- 💭 Community feedback
+- 💡 Player suggestions
+- 📝 Feature requests
+- 🐛 Bug reports
+- ⛓️ Cross-chain support
 
-## Technical Development
+## 💰 Economic Development
 
-### Infrastructure
-- Scalability improvements
-- Security enhancements
-- Performance optimization
-- Cross-platform support
+### 📊 Tokenomics
+- ⛓️ Multi-chain economy
+- 💎 Vault rewards
+- 📈 Supply management
+- 💹 Value stability
+- 📈 Growth strategies
 
-### Features
-- New mechanics
-- Enhanced systems
-- Advanced features
-- Community tools
+### 🏪 Marketplace
+- 💱 Cross-chain trading
+- 📊 Market stability
+- 💰 Price mechanisms
+- 🛠️ Trading tools
+- 🍎 NFT fruit marketplace
 
-## Community Growth
+## 🔒 Security & Compliance
 
-### Engagement
-- Community events
-- Social features
-- Governance tools
-- Reward systems
+### 🛡️ Security
+- ⛓️ Multi-chain security
+- 👥 Player protection
+- 💎 Asset security
+- 🚫 Fraud prevention
+- 🔒 Cross-chain safety
 
-### Development
-- Community feedback
-- Player suggestions
-- Feature requests
-- Bug reports
+### 📜 Compliance
+- 📋 Regulatory compliance
+- ⚖️ Legal requirements
+- 👥 User protection
+- 🔐 Data security
+- ⛓️ Chain-specific regulations
 
-## Economic Development
+## 💡 Innovation & Research
 
-### Tokenomics
-- Economic balance
-- Supply management
-- Value stability
-- Growth strategies
+### 🔬 Research
+- ⛓️ New blockchain technologies
+- 🎮 Game mechanics
+- 💰 Economic models
+- 👥 Community features
+- 🔄 Cross-chain solutions
 
-### Marketplace
-- Trading features
-- Market stability
-- Price mechanisms
-- Trading tools
-
-## Security & Compliance
-
-### Security
-- System security
-- Player protection
-- Asset security
-- Fraud prevention
-
-### Compliance
-- Regulatory compliance
-- Legal requirements
-- User protection
-- Data security
-
-## Innovation & Research
-
-### Research
-- New technologies
-- Game mechanics
-- Economic models
-- Community features
-
-### Innovation
-- Feature development
-- System improvements
-- Community tools
-- Player experience 
+### 🚀 Innovation
+- 🎮 Feature development
+- ⚡ System improvements
+- 👥 Community tools
+- 🎯 Player experience
+- ⛓️ Multi-chain integration

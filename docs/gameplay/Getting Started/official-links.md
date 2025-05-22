@@ -5,33 +5,33 @@ description: All official CiFarm links and resources
 slug: /official-links
 ---
 
-# Official CiFarm Links
+# 🔗 Official CiFarm Links
 
 Stay connected with CiFarm through our official channels and resources.
 
-## Important Notes
+## ⚠️ Important Notes
 
-- Always verify links through our official channels
-- Be cautious of unofficial groups and channels
-- Report suspicious activities to our support team 
+- 🔒 Always verify links through our official channels
+- 🚫 Be cautious of unofficial groups and channels
+- 🚨 Report suspicious activities to our support team 
 
-## Social Media
+## 📱 Social Media
 
-- [X](https://x.com/CifarmOnSol) - Latest updates and announcements
+- 🐦 [X](https://x.com/CifarmOnSol) - Latest updates and announcements
 
-## Game Resources
+## 🎮 Game Resources
 
-- [Game Website](https://cifarm.xyz)
-- [Whitepaper](https://docs.cifarm.xyz)
-- [Roadmap](https://cifarm.xyz)
+- 🌐 [Game Website](https://cifarm.xyz)
+- 📄 [Whitepaper](https://docs.cifarm.xyz)
+- 🗺️ [Roadmap](https://cifarm.xyz)
 
-## Blockchain
+## ⛓️ Blockchain
 
-- [Sui Vision](https://cifarm.xyz)
-- [Token Contract](https://cifarm.xyz)
-- [Marketplace](https://cifarm.xyz)
+- 👁️ [Sui Vision](https://cifarm.xyz)
+- 💎 [Token Contract](https://cifarm.xyz)
+- 🏪 [Marketplace](https://cifarm.xyz)
 
-## Support
+## 🆘 Support
 
-- [Bug Reports](https://github.com/starci-lab/cifarm-wallet/issues)
+- 🐛 [Bug Reports](https://github.com/starci-lab/cifarm-wallet/issues)
 

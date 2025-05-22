@@ -6,80 +6,60 @@ slug: /fundamentals/team
 sidebar_position: 1
 ---
 
-# The CiFarm Team
+# 👥 The CiFarm Team
 
-Meet the passionate individuals behind CiFarm, dedicated to creating an engaging and sustainable gaming experience.
+Meet the passionate individuals behind CiFarm, dedicated to creating an engaging and sustainable gaming experience that bridges Web2 and Web3.
 
-## Core Team
+## 🎯 Core Team
 
-### Leadership
-- **CEO & Founder**: [Name] - Vision and Strategy
-- **CTO**: [Name] - Technical Architecture
-- **Game Director**: [Name] - Game Design
-- **Community Lead**: [Name] - Community Management
+### 👑 Leadership
+- **Technical Founder**: Stacy Nguyen - Deep understanding of blockchain and Web3
+- **Technical Co-founder**: Uy Le - Web3 and HTML5 game development expert
+- **Non-technical Founder**: Kyle Dong - Business and marketing expertise
+- **Lead Game Artist**: Trang Dai - Game design and art specialist
 
-### Development Team
-- **Lead Developer**: [Name] - Core Systems
-- **Game Developers**: [Team Members]
-- **Blockchain Engineers**: [Team Members]
-- **UI/UX Designers**: [Team Members]
+## 🌟 Our Vision
 
-### Operations
-- **Marketing Director**: [Name] - Growth Strategy
-- **Community Managers**: [Team Members]
-- **Support Team**: [Team Members]
-- **Content Creators**: [Team Members]
+### 🎯 Mission Statement
+Building the most engaging and sustainable farming game that seamlessly bridges Web2 and Web3 gaming, powered by multi-chain technology.
 
-## Our Vision
+### 💫 Core Values
+- 👥 Player-First Approach
+- 💡 Innovation in Gaming
+- 🌱 Community-Driven Development
+- 💰 Sustainable Economy
+- 🔍 Transparent Operations
+- ⛓️ Multi-Chain Accessibility
 
-### Mission Statement
-Building the most engaging and sustainable P2P farming game on Telegram, powered by blockchain technology.
+## 🏗️ Team Culture
 
-### Core Values
-- Player-First Approach
-- Innovation in Gaming
-- Community-Driven Development
-- Sustainable Economy
-- Transparent Operations
+### 💭 Work Philosophy
+- ⚡ Agile Development
+- 📈 Continuous Improvement
+- 💬 Open Communication
+- 👥 Community Feedback
+- 🔄 Cross-Chain Innovation
 
-## Team Culture
+## 🤝 Community Engagement
 
-### Work Philosophy
-- Agile Development
-- Continuous Improvement
-- Open Communication
-- Community Feedback
+### 👥 Team Presence
+- 🎤 Regular AMAs
+- 🎉 Community Events
+- 💬 Social Media Interaction
+- 🔧 Developer Updates
+- ⛓️ Chain-Specific Support
 
-### Development Approach
-- Player-Centric Design
-- Data-Driven Decisions
-- Regular Updates
-- Quality Assurance
+### 📢 Feedback Channels
+- 💬 Social Media
+- 🎫 Support Tickets
+- 🌐 Chain-Specific Forums
+- 🔧 Web2/Web3 Support
 
-## Community Engagement
+## 📈 Future Growth
 
-### Team Presence
-- Regular AMAs
-- Community Events
-- Social Media Interaction
-- Developer Updates
-
-### Feedback Channels
-- Discord Community
-- Telegram Groups
-- Social Media
-- Support Tickets
-
-## Future Growth
-
-### Team Expansion
-- New Positions
-- Skill Development
-- Global Reach
-- Specialized Roles
-
-### Career Opportunities
-- Open Positions
-- Internship Programs
-- Community Roles
-- Development Opportunities 
+### 🌱 Team Expansion
+- 👥 New Positions
+- 📚 Skill Development
+- 🌍 Global Reach
+- 🎯 Specialized Roles
+- ⛓️ Chain-Specific Experts
