@@ -8,9 +8,9 @@ sidebar_position: 1
 
 # Hello, CiFarmers! 🥕
 
-# CiFarm: Redefining P2P Farming Games on Telegram 🪴
+# CiFarm: The Next Generation of Farming Games 🪴
 
-Welcome to **CiFarm**, the ultimate Solana-powered peer-to-peer (P2P) farming sensation taking Telegram by storm! We're not just another farming game—we're rewriting the rulebook with a bold launch packed with groundbreaking features. Built to outshine the competition in Telegram's gaming ecosystem, CiFarm blends addictive gameplay, blockchain magic, and a thriving community into one irresistible package. Get ready to dig in and dominate!
+Welcome to **CiFarm**, the revolutionary multi-chain farming game that's redefining the genre! We're not just another farming game—we're creating a new standard with innovative features that make blockchain gaming accessible to everyone. Built on SUI, Solana, and soon Somnia, CiFarm combines addictive gameplay, blockchain technology, and a thriving community into one seamless experience. Get ready to farm, thieve, and earn!
 
 ![CiFarm](/img/farm.png)
 
@@ -19,28 +19,51 @@ Welcome to **CiFarm**, the ultimate Solana-powered peer-to-peer (P2P) farming se
 CiFarm delivers a gameplay loop that's equal parts strategy, mischief, and reward:
 
 ### **Farm 🌱**  
-Plant your seeds, nurture your crops, and raise quirky livestock to grow a sprawling agricultural empire. From humble **carrots 🥕** to rare mystical harvests, your farm is your kingdom—build it big!
+Plant your seeds, nurture your crops, and raise animals to grow your agricultural empire. From basic crops to rare NFT fruits like **Dragon Fruit 🐉** and **Jackfruit 🥭**, your farm is your kingdom—build it your way!
 
 ### **Thieve 🪬**  
-Why stop at farming? Sneak into your neighbors' fields and **"borrow"** their resources with a sly grin. Outsmart your rivals, snag their loot, and turn their hard work into your edge—strategy meets mischief in this playful twist!
+Why stop at farming? Visit your neighbors' farms and **"borrow"** their resources with a sly grin. Outsmart your rivals, snag their loot, and turn their hard work into your advantage—strategy meets mischief in this playful twist!
 
 ### **Earn 💰**  
-Reap the fruits of your labor (and your cunning). Harvest **gold**, stack **$CARROT tokens**, and unlock exclusive rewards in a world buzzing with opportunity. Every move pays off—literally!  
-
-This trio of **Farm, Thieve, Earn** isn't just fun—it's a rollercoaster of thrills that keeps you hooked, whether you're a casual grower or a master schemer. No matter your playstyle, CiFarm's got something to keep your adrenaline pumping and your pockets full.
+Reap the fruits of your labor (and your cunning). Earn **gold** through regular gameplay, collect **$CIFARM tokens** for premium features, and unlock exclusive rewards in a world full of opportunities. Every action counts!
 
 ## A Game for Everyone 🌍
 
-CiFarm tears down the walls between **classic gaming** and the **Web3 frontier**. Newbies, don't sweat it—**no blockchain PhD required!** Jump in with zero Web3 know-how and start farming like a pro from day one.  
+CiFarm breaks down the barriers between **Web2** and **Web3** gaming. Whether you're new to blockchain or a crypto veteran, everyone can enjoy CiFarm:
 
-For the seasoned crypto crowd, the deeper you dive, the more you'll uncover—**decentralized perks, NFT-powered boosts, and tokenomics that reward your savvy**. It's a seamless bridge from Telegram taps to blockchain triumphs, welcoming all to the party!
+### **For Web2 Players:**
+- Start playing immediately with in-game gold
+- No blockchain knowledge required
+- Simple and intuitive interface
+- Regular gameplay features
 
-## Why CiFarm Stands Tall
+### **For Web3 Players:**
+- Connect your wallet for premium features
+- Trade NFT fruits on the marketplace
+- Participate in the token economy
+- Access exclusive Web3 features
 
-Powered by **Solana's lightning-fast tech**, CiFarm isn't just keeping up with the Telegram gaming scene—it's **blazing the trail**. With a **vibrant ecosystem, cheeky thieving mechanics, and rewards that scale with your ambition**, we're here to transform how you **play, compete, and win**.  
+## Why CiFarm Stands Out
 
-This isn't your grandma's farm sim—it's a **bold, boundary-pushing adventure** where every seed planted and every resource nabbed brings you closer to **glory**.
+Powered by **multiple blockchains**, CiFarm offers:
+
+- **Fast & Affordable:** Enjoy low transaction fees and quick confirmations
+- **Accessible:** Play with or without a wallet
+- **Innovative:** Unique thieving mechanics and reward systems
+- **Community-Driven:** Player-focused development and rewards
+- **Sustainable:** Vault-based economy that benefits all players
+
+## Premium Features
+
+For players who want more:
+
+- **NFT Fruits:** Rare and valuable crops
+- **Vault System:** Ship fruits to earn rewards
+- **Marketplace:** Trade with other players
+- **Special Events:** Seasonal challenges and competitions
 
 ## Join the Revolution!
 
-**CiFarmers, the fields are calling!** Get ready to **farm🌱, thieve🪬, and earn💰**. Launch day is your ticket to a **Telegram gaming revolution**—grab your hoe, sharpen your wits, and let's grow this empire together!
+**CiFarmers, the fields are waiting!** Whether you're a casual player or a blockchain enthusiast, CiFarm has something for you. Start your farming adventure today and be part of the next generation of gaming!
+
+> 💡 **Tip:** Start with regular gameplay using gold, then explore Web3 features when you're ready!
