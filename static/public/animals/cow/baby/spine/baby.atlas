@@ -1,0 +1,12 @@
+baby.png
+size:246,184
+filter:Linear,Linear
+pma:true
+v2/bocon2/body
+bounds:2,2,183,180
+v2/bocon2/ear1
+bounds:187,81,47,38
+v2/bocon2/ear2
+bounds:187,37,38,42
+v2/bocon2/tail
+bounds:187,121,57,61

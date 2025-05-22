@@ -1,0 +1,15 @@
+adult.png
+size:326,237
+filter:Linear,Linear
+pma:true
+v2/bome/body
+bounds:2,2,256,233
+v2/bome/ear1
+bounds:260,50,60,42
+offsets:1,1,62,44
+rotate:90
+v2/bome/ear2
+bounds:260,112,55,53
+offsets:1,1,57,55
+v2/bome/tail
+bounds:260,167,64,68

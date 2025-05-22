@@ -1,0 +1,10 @@
+meo.png
+size:207,123
+filter:Linear,Linear
+pma:true
+v2/meo/body
+bounds:2,2,119,161
+rotate:90
+v2/meo/tail
+bounds:165,66,55,40
+rotate:90
