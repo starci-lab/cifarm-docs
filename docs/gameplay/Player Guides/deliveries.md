@@ -109,7 +109,6 @@ Master the delivery system in CiFarm to earn rewards and help other players.
 ## Tips & Strategies
 
 ### Before Delivery
-- Check weather
 - Plan backup routes
 - Prepare supplies
 - Review requirements

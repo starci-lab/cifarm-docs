@@ -1,0 +1,9 @@
+{
+  "label": "👩‍🌾 Crops",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn how to grow different crops in CiFarm",
+    "slug": "/player-guides/grow-crops-guide/crops"
+  }
+} 
